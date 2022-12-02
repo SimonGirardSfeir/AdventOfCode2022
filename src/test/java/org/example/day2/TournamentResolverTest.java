@@ -27,7 +27,7 @@ class TournamentResolverTest {
     }
 
     @Test
-    void resolve_part2_of_day1_problem() {
+    void resolve_part2_of_day2_problem() {
         Tournament tournament = TournamentResolver.getTournamentType2FromLines(lines);
         int tournamentScore = tournament.computeTournamentScore();
 
