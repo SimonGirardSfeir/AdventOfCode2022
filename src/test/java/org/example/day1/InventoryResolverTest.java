@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ResolverTest {
+class InventoryResolverTest {
     private List<String> lines;
 
     @BeforeEach
@@ -19,7 +19,7 @@ class ResolverTest {
 
     @Test
     void resolve_part1_of_day1_problem() {
-        Inventory inventory = Resolver.inventoryFromLine(lines);
+        Inventory inventory = InventoryResolver.inventoryFromLine(lines);
         FoodBag foodBagWithMostCalories = inventory.getFoodBagWithMostCalories();
         int topCalories = foodBagWithMostCalories.getFootBagTotalCalories();
 
@@ -28,7 +28,7 @@ class ResolverTest {
 
     @Test
     void resolve_part2_of_day1_problem() {
-        Inventory inventory = Resolver.inventoryFromLine(lines);
+        Inventory inventory = InventoryResolver.inventoryFromLine(lines);
         int totalCaloriesTop3 = inventory.computeTotalCaloriesFromTop3FoodBagsWithMostCalories();
 
         assertThat(totalCaloriesTop3).isEqualTo(209914);

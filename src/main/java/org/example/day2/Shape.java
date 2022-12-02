@@ -10,14 +10,12 @@ public enum Shape {
                 case ROCK -> 3;
             };
         }
-
         @Override
-        public Shape getShapeWeWin() {
+        public Shape winAgainst() {
             return SCISSORS;
         }
-
         @Override
-        public Shape getShapeWeLose() {
+        public Shape loseAgainst() {
             return PAPER;
         }
     }, PAPER(2) {
@@ -29,14 +27,12 @@ public enum Shape {
                 case ROCK -> 6;
             };
         }
-
         @Override
-        public Shape getShapeWeWin() {
+        public Shape winAgainst() {
             return ROCK;
         }
-
         @Override
-        public Shape getShapeWeLose() {
+        public Shape loseAgainst() {
             return SCISSORS;
         }
     }, SCISSORS(3) {
@@ -48,14 +44,12 @@ public enum Shape {
                 case ROCK -> 0;
             };
         }
-
         @Override
-        public Shape getShapeWeWin() {
+        public Shape winAgainst() {
             return PAPER;
         }
-
         @Override
-        public Shape getShapeWeLose() {
+        public Shape loseAgainst() {
             return ROCK;
         }
     };
@@ -71,7 +65,6 @@ public enum Shape {
     }
 
     public abstract int getOutCome(Shape opponentShape);
-
-    public abstract Shape getShapeWeWin();
-    public abstract Shape getShapeWeLose();
+    public abstract Shape winAgainst();
+    public abstract Shape loseAgainst();
 }

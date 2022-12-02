@@ -25,9 +25,9 @@ class RoundTest {
     }
     @ParameterizedTest
     @MethodSource("inputRound")
-    void computeScore_should_give_player_score_for_the_round(Round givenRound, int expectedScore) {
+    void computePlayerScore_should_give_player_score_for_the_round(Round givenRound, int expectedScore) {
         //When
-        int score = givenRound.computeScore();
+        int score = givenRound.computePlayerScore();
 
         assertThat(score).isEqualTo(expectedScore);
     }

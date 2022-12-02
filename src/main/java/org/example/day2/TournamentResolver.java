@@ -5,10 +5,10 @@ import org.example.day2.exception.InvalidDataFromFile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Resolver {
-
-    private Resolver () {
+public class TournamentResolver {
+    private TournamentResolver() {
     }
+
     public static Tournament getTournamentFromLines(List<String> lines) {
         List<Round> rounds = new ArrayList<>();
         Tournament tournament = new Tournament(rounds);
@@ -31,7 +31,27 @@ public class Resolver {
         return tournament;
 
     }
+    public static Tournament getTournamentType2FromLines(List<String> lines) {
+        List<Round> rounds = new ArrayList<>();
+        Tournament tournament = new Tournament(rounds);
 
+        for(String line : lines) {
+            String[] splittedLine = lineSpliter(line);
+            Shape playerShape;
+            Shape opponentShape = getOpponentShape(splittedLine[0]);
+            switch (splittedLine[1]) {
+                case "X" -> playerShape = opponentShape.winAgainst();
+                case "Y" -> playerShape = opponentShape;
+                case "Z" -> playerShape = opponentShape.loseAgainst();
+                default -> throw new InvalidDataFromFile();
+            }
+            Round tempRound = new Round(playerShape, opponentShape);
+            rounds.add(tempRound);
+        }
+
+        return tournament;
+
+    }
     private static Shape getOpponentShape(String leftPartLine) {
         Shape opponentShape;
         switch (leftPartLine) {
@@ -42,29 +62,6 @@ public class Resolver {
         }
         return opponentShape;
     }
-
-    public static Tournament getTournamentType2FromLines(List<String> lines) {
-        List<Round> rounds = new ArrayList<>();
-        Tournament tournament = new Tournament(rounds);
-
-        for(String line : lines) {
-            String[] splittedLine = lineSpliter(line);
-            Shape playerShape;
-            Shape opponentShape = getOpponentShape(splittedLine[0]);
-            switch (splittedLine[1]) {
-                case "X" -> playerShape = opponentShape.getShapeWeWin();
-                case "Y" -> playerShape = opponentShape;
-                case "Z" -> playerShape = opponentShape.getShapeWeLose();
-                default -> throw new InvalidDataFromFile();
-            }
-            Round tempRound = new Round(playerShape, opponentShape);
-            rounds.add(tempRound);
-        }
-
-        return tournament;
-
-    }
-
     private static String[] lineSpliter(String line) {
         return line.split(" ");
     }

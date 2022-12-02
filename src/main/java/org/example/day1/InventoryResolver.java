@@ -2,10 +2,10 @@ package org.example.day1;
 
 import java.util.ArrayList;
 import java.util.List;
-public class Resolver {
-
-    private Resolver() {
+public class InventoryResolver {
+    private InventoryResolver() {
     }
+
     public static Inventory inventoryFromLine(List<String> lines) {
         List<FoodBag> foodBags = new ArrayList<>();
         Inventory inventory = new Inventory(foodBags);
