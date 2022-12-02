@@ -29,10 +29,7 @@ class ResolverTest {
     @Test
     void resolve_part2_of_day1_problem() {
         Inventory inventory = Resolver.inventoryFromLine(lines);
-        List<FoodBag> top3foodBagWithMostCalories = inventory.getTop3FoodBagsWithMostCalories();
-        int totalCaloriesTop3 = top3foodBagWithMostCalories.stream()
-                .map(FoodBag::getFootBagTotalCalories)
-                .reduce(0, Integer::sum);
+        int totalCaloriesTop3 = inventory.computeTotalCaloriesFromTop3FoodBagsWithMostCalories();
 
         assertThat(totalCaloriesTop3).isEqualTo(209914);
     }

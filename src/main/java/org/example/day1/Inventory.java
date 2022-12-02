@@ -15,4 +15,10 @@ public record Inventory(List<FoodBag> foodBags) {
                 .limit(3)
                 .toList();
     }
+
+    public int computeTotalCaloriesFromTop3FoodBagsWithMostCalories() {
+        return getTop3FoodBagsWithMostCalories().stream()
+                .map(FoodBag::getFootBagTotalCalories)
+                .reduce(0, Integer::sum);
+    }
 }
