@@ -1,20 +1,10 @@
 package org.example.day1;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
-
 public class Resolver {
 
     private Resolver() {
-    }
-    public static List<String> getLines(String fileName) throws IOException {
-        try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
-            return stream.toList();
-        }
     }
     public static Inventory inventoryFromLine(List<String> lines) {
         List<FoodBag> foodBags = new ArrayList<>();
