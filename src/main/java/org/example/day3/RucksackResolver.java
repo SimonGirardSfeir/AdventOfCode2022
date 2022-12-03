@@ -32,7 +32,7 @@ public class RucksackResolver {
         }
         return new RucksackInventory(rucksacks);
     }
-    public static boolean allElementsContainsItem(List<String> elements, Character item) {
+    private static boolean allElementsContainsItem(List<String> elements, Character item) {
         boolean output = true;
         for(String element : elements) {
             if (element.indexOf(item) < 0) {
