@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SectionPairResolver {
+    private SectionPairResolver() {
+    }
 
     public static SectionPairInventory getSectionPairInventoryFromLines(List<String> lines) {
         List<SectionPair> sectionPairs = new ArrayList<>();

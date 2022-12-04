@@ -8,7 +8,6 @@ public record SectionPairInventory(List<SectionPair> sectionPairs) {
                 .filter(SectionPair::isOneSectionFullyContainingOtherSection)
                 .count();
     }
-
     public long countSectionPairsWithOverlap() {
         return sectionPairs.stream()
                 .filter(SectionPair::isPairOverlap)
