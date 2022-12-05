@@ -32,21 +32,19 @@ public class RucksackResolver {
         }
         return new RucksackInventory(rucksacks);
     }
-    private static boolean allElementsContainsItem(List<String> elements, Character item) {
-        boolean output = true;
+    private static boolean allElementsContainItem(List<String> elements, Character item) {
         for(String element : elements) {
             if (element.indexOf(item) < 0) {
-                output = false;
-                break;
+                return false;
             }
         }
-        return output;
+        return true;
     }
     public static Character getCommonItemBetweenLines(List<String> lines) {
         return lines.get(0)
                 .chars()
                 .mapToObj(i -> (char)i)
-                .filter(c -> allElementsContainsItem(lines.stream().skip(1).toList(), c))
+                .filter(c -> allElementsContainItem(lines.stream().skip(1).toList(), c))
                 .findFirst().orElse(null);
     }
 }

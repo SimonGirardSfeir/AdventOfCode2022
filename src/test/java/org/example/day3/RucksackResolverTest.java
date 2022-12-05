@@ -35,7 +35,7 @@ class RucksackResolverTest {
         RucksackInventory rucksackInventory = RucksackResolver.getRuckSackInventoryFromLines(lines);
 
         //When
-        int totalPriority = rucksackInventory.computeTotalPriorityRucksacksGrouped(3);
+        int totalPriority = rucksackInventory.computeTotalPriorityWithRucksacksGroupedByN(3);
 
         //Then
         assertThat(totalPriority).isEqualTo(2821);

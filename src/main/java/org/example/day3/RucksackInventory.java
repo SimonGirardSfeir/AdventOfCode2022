@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import static org.example.day3.RucksackResolver.itemToPriorityMap;
 
 public record RucksackInventory(List<Rucksack> rucksacks) {
-
     public int computeTotalPriority() {
         return rucksacks.stream()
                 .map(Rucksack::getCommonItem)
@@ -19,7 +18,7 @@ public record RucksackInventory(List<Rucksack> rucksacks) {
         return rucksacks.stream().collect(Collectors.groupingBy(r -> rucksacks.indexOf(r)/groupSize)).values();
     }
 
-    public int computeTotalPriorityRucksacksGrouped(int groupSize) {
+    public int computeTotalPriorityWithRucksacksGroupedByN(int groupSize) {
         return groupRucksacksByN(groupSize).stream()
                 .map(list -> list.stream().map(rucksack -> rucksack.firstCompartment() + rucksack.secondCompartment()).toList())
                 .map(RucksackResolver::getCommonItemBetweenLines)

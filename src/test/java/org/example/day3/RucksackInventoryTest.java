@@ -28,7 +28,7 @@ class RucksackInventoryTest {
     }
 
     @Test
-    void computeTotalPriorityRucksacksGrouped_should_give_total_priority_of_rucksacks_inventory_grouped() {
+    void computeTotalPriorityWithRucksacksGroupedByN_should_give_total_priority_of_rucksacks_inventory_grouped() {
         //Given
         Rucksack rucksack1 = Rucksack.of("vJrwpWtwJgWrhcsFMMfFFhFp");
         Rucksack rucksack2 = Rucksack.of("jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL");
@@ -40,7 +40,7 @@ class RucksackInventoryTest {
         RucksackInventory rucksackInventory = new RucksackInventory(rucksacks);
 
         //When
-        int totalPriority = rucksackInventory.computeTotalPriorityRucksacksGrouped(3);
+        int totalPriority = rucksackInventory.computeTotalPriorityWithRucksacksGroupedByN(3);
 
         //Then
         assertThat(totalPriority).isEqualTo(70);
