@@ -1,13 +1,17 @@
 package org.example.day2;
 
+import static org.example.day2.Outcome.DRAW;
+import static org.example.day2.Outcome.LOSE;
+import static org.example.day2.Outcome.WIN;
+
 public enum Shape {
     ROCK(1) {
         @Override
-        public int getOutCome(Shape opponentShape) {
+        public Outcome getOutcome(Shape opponentShape) {
             return switch(opponentShape) {
-                case PAPER -> 0;
-                case SCISSORS -> 6;
-                case ROCK -> 3;
+                case PAPER -> LOSE;
+                case SCISSORS -> WIN;
+                case ROCK -> DRAW;
             };
         }
         @Override
@@ -20,11 +24,11 @@ public enum Shape {
         }
     }, PAPER(2) {
         @Override
-        public int getOutCome(Shape opponentShape) {
+        public Outcome getOutcome(Shape opponentShape) {
             return switch(opponentShape) {
-                case PAPER -> 3;
-                case SCISSORS -> 0;
-                case ROCK -> 6;
+                case PAPER -> DRAW;
+                case SCISSORS -> LOSE;
+                case ROCK -> WIN;
             };
         }
         @Override
@@ -37,11 +41,11 @@ public enum Shape {
         }
     }, SCISSORS(3) {
         @Override
-        public int getOutCome(Shape opponentShape) {
+        public Outcome getOutcome(Shape opponentShape) {
             return switch(opponentShape) {
-                case PAPER -> 6;
-                case SCISSORS -> 3;
-                case ROCK -> 0;
+                case PAPER -> WIN;
+                case SCISSORS -> DRAW;
+                case ROCK -> LOSE;
             };
         }
         @Override
@@ -60,11 +64,7 @@ public enum Shape {
         this.value = value;
     }
 
-    public int getValue() {
-        return value;
-    }
-
-    public abstract int getOutCome(Shape opponentShape);
+    public abstract Outcome getOutcome(Shape opponentShape);
     public abstract Shape winAgainst();
     public abstract Shape loseAgainst();
 }
