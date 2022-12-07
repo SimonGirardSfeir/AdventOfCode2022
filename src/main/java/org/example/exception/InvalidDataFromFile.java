@@ -1,4 +1,4 @@
-package org.example.day2.exception;
+package org.example.exception;
 
 public class InvalidDataFromFile extends RuntimeException {
 }

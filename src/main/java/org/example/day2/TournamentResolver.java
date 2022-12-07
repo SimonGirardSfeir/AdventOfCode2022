@@ -1,6 +1,6 @@
 package org.example.day2;
 
-import org.example.day2.exception.InvalidDataFromFile;
+import org.example.exception.InvalidDataFromFile;
 
 import java.util.ArrayList;
 import java.util.List;
