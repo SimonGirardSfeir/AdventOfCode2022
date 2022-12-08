@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public interface Node {
     String name();
     List<Node> subElements();
-    int accept(FileVisitor fileVisitor);
-    int accept(FileVisitor fileVisitor, int spaceNeededToFreeUp);
-    int accept(FileVisitor fileVisitor, int maxSize, AtomicInteger currentSum);
+    int accept(Visitor visitor);
+    int acceptSizeLimitedDirectories(Visitor visitor, int maxSize, AtomicInteger counter);
+    int acceptSmallestDirectory(Visitor visitor, int spaceNeededToFreeUp, AtomicInteger counter);
 }

@@ -19,21 +19,22 @@ public record DirectoryInformation(String name, List<Node> subElements) implemen
     }
 
     @Override
-    public int accept(FileVisitor fileVisitor) {
-        return fileVisitor.visitDirectoryInformation(this);
+    public int accept(Visitor visitor) {
+        return visitor.directoryInformationVisitor(this);
     }
-
     @Override
-    public int accept(FileVisitor fileVisitor, int spaceNeededToFreeUp) {
-        return fileVisitor.visitDirectoryInformation(this, spaceNeededToFreeUp);
-    }
-
-    @Override
-    public int accept(FileVisitor fileVisitor, int maxSize, AtomicInteger currentSum) {
-        int directorySize = fileVisitor.visitDirectoryInformation(this, maxSize, currentSum);
+    public int acceptSizeLimitedDirectories(Visitor visitor, int maxSize, AtomicInteger counter) {
+        int directorySize = visitor.directoryInformationVisitor(this);
         if(directorySize <= maxSize)
-            currentSum.addAndGet(directorySize);
+            counter.addAndGet(directorySize);
 
+        return directorySize;
+    }
+    @Override
+    public int acceptSmallestDirectory(Visitor visitor, int spaceNeededToFreeUp, AtomicInteger counter) {
+        int directorySize = visitor.directoryInformationVisitor(this);
+        if(counter.get() > directorySize && directorySize > spaceNeededToFreeUp)
+            counter.set(directorySize);
         return directorySize;
     }
 }

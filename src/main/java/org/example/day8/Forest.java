@@ -1,11 +1,9 @@
 package org.example.day8;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public record Forest(Tree[][] trees) {
-
     public static Forest of(List<String> lines) {
         int westEastLength = lines.get(0).length();
         int northSouthLength = lines.size();
@@ -48,61 +46,59 @@ public record Forest(Tree[][] trees) {
     }
 
     private int currentTreeScenicScore(int x, int y) {
-        int scenicScoreLeft = 0;
+        int treesSeenOnLeft = 0;
         int treeHeight = trees[x][y].height();
         for(int i = x-1; i >= 0; i--) {
-            scenicScoreLeft++;
+            treesSeenOnLeft++;
             if(trees[i][y].height() >= treeHeight)
                 break;
         }
-        int scenicScoreRight = 0;
+        int treesSeenOnRight = 0;
         for(int i = x+1; i < trees.length; i++) {
-            scenicScoreRight++;
+            treesSeenOnRight++;
             if(trees[i][y].height() >= treeHeight)
                 break;
         }
-        int scenicScoreBottom = 0;
+        int treesSeenOnBottom = 0;
         for(int j = y-1; j >= 0; j--) {
-            scenicScoreBottom++;
+            treesSeenOnBottom++;
             if(trees[x][j].height() >= treeHeight)
                 break;
         }
-        int scenicScoreTop = 0;
+        int treesSeenOnTop = 0;
         for(int j = y+1; j < trees.length; j++) {
-            scenicScoreTop++;
+            treesSeenOnTop++;
             if(trees[x][j].height() >= treeHeight)
                 break;
         }
-        return scenicScoreLeft * scenicScoreBottom * scenicScoreTop * scenicScoreRight;
+        return treesSeenOnLeft * treesSeenOnBottom * treesSeenOnTop * treesSeenOnRight;
     }
-
     private boolean isCurrentTreeVisible(int x, int y) {
         int treeHeight = trees[x][y].height();
-        List<Tree> treesOnLeft = new ArrayList<>();
+        int maxHeightOnLeft = 0;
         for(int i = 0; i < x; i++) {
-            treesOnLeft.add(trees[i][y]);
+            if(trees[i][y].height() > maxHeightOnLeft)
+                maxHeightOnLeft = trees[i][y].height();
         }
-        int maxHeightOnLeft = maxHeightInRange(treesOnLeft);
-        List<Tree> treesOnRight = new ArrayList<>();
+        int maxHeightOnRight = 0;
         for(int i = x+1; i < trees.length; i++) {
-            treesOnRight.add(trees[i][y]);
+            if(trees[i][y].height() > maxHeightOnRight)
+                maxHeightOnRight = trees[i][y].height();
         }
-        int maxHeightOnRight = maxHeightInRange(treesOnRight);
-        List<Tree> treesOnBottom = new ArrayList<>(Arrays.asList(trees[x]).subList(0, y));
-        int maxHeightOnBottom = maxHeightInRange(treesOnBottom);
-        List<Tree> treesOnTop = new ArrayList<>(Arrays.asList(trees[x]).subList(y + 1, trees.length));
-        int maxHeightOnTop = maxHeightInRange(treesOnTop);
+        int maxHeightOnBottom = 0;
+        for(int j = 0; j < y; j++) {
+            if(trees[x][j].height() > maxHeightOnBottom)
+                maxHeightOnBottom = trees[x][j].height();
+        }
+        int maxHeightOnTop = 0;
+        for(int j = y+1; j < trees.length; j++) {
+            if(trees[x][j].height() > maxHeightOnTop)
+                maxHeightOnTop = trees[x][j].height();
+        }
+
         return  (treeHeight > maxHeightOnTop) || (treeHeight > maxHeightOnBottom) ||
                 (treeHeight > maxHeightOnLeft) || (treeHeight > maxHeightOnRight);
 
-    }
-    private int maxHeightInRange(List<Tree> treeRange) {
-        int maxHeight = 0;
-        for(Tree tree : treeRange) {
-            if(tree.height() >= maxHeight)
-                maxHeight = tree.height();
-        }
-        return maxHeight;
     }
 
     @Override

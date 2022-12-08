@@ -50,9 +50,9 @@ class FileSystemResolverTest {
     void resolve_part1_of_day7_problem() {
         //Given
         Node givenNode = FileSystemResolver.getFileSystemFromLines(lines);
-        FileVisitor fileVisitor = new FileVisitor();
+        Visitor visitor = new CountTotalSizeLimitedDirectoriesVisitor(100000);
         //When
-        int nodeUpTo100000TotalSize = fileVisitor.countNodeTotalSizeOfNodesWithSizeUpToMaxSize(givenNode, 100000);
+        int nodeUpTo100000TotalSize = visitor.perform(givenNode);
         //Then
         assertThat(nodeUpTo100000TotalSize).isEqualTo(1428881);
     }
@@ -61,10 +61,9 @@ class FileSystemResolverTest {
     void resolve_part2_of_day7_problem() {
         //Given
         Node givenNode = FileSystemResolver.getFileSystemFromLines(lines);
-        FileVisitor fileVisitor = new FileVisitor();
+        Visitor visitor = new CountTotalSizeSmallestDirectoryBigEnoughToDeleteForFreeUpEnoughSpaceForSystemUpdateVisitor(40000000);
         //When
-        int nodeUpTo100000TotalSize = fileVisitor.computeTotalSizeOfSmallestDirectoryBigEnoughToDeleteForFreeUpEnoughSpaceForSystemUpdate
-                (givenNode, 70000000, 30000000);
+        int nodeUpTo100000TotalSize = visitor.perform(givenNode);
         //Then
         assertThat(nodeUpTo100000TotalSize).isEqualTo(10475598);
     }

@@ -15,17 +15,17 @@ public record FileInformation(String name, int fileSize) implements Node {
     public List<Node> subElements() {
         return Collections.emptyList();
     }
-    @Override
-    public int accept(FileVisitor fileVisitor) {
-        return fileVisitor.visitFileInformation(this);
-    }
-    @Override
-    public int accept(FileVisitor fileVisitor, int spaceNeededToFreeUp) {
-        return accept(fileVisitor);
-    }
-    @Override
-    public int accept(FileVisitor fileVisitor, int maxSize, AtomicInteger currentSum) {
-        return accept(fileVisitor);
-    }
 
+    @Override
+    public int accept(Visitor visitor) {
+        return visitor.fileInformationVisitor(this);
+    }
+    @Override
+    public int acceptSizeLimitedDirectories(Visitor visitor, int maxSize, AtomicInteger counter) {
+        return accept(visitor);
+    }
+    @Override
+    public int acceptSmallestDirectory(Visitor visitor, int spaceNeededToFreeUp, AtomicInteger counter) {
+        return accept(visitor);
+    }
 }
