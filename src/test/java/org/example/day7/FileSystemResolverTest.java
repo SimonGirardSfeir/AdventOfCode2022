@@ -1,7 +1,6 @@
 package org.example.day7;
 
 import org.example.LineExtractor;
-import org.example.day6.MarkerResolver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
