@@ -50,7 +50,7 @@ class FileSystemResolverTest {
     void resolve_part1_of_day7_problem() {
         //Given
         Node givenNode = FileSystemResolver.getFileSystemFromLines(lines);
-        Visitor visitor = new CountTotalSizeLimitedDirectoriesVisitor(100000);
+        Visitor visitor = new SumOfDirectoriesSizeUpToMaxSizeVisitor(100000);
         //When
         int nodeUpTo100000TotalSize = visitor.perform(givenNode);
         //Then
@@ -61,7 +61,7 @@ class FileSystemResolverTest {
     void resolve_part2_of_day7_problem() {
         //Given
         Node givenNode = FileSystemResolver.getFileSystemFromLines(lines);
-        Visitor visitor = new CountTotalSizeSmallestDirectoryBigEnoughToDeleteForFreeUpEnoughSpaceForSystemUpdateVisitor(40000000);
+        Visitor visitor = new SizeSmallestDirectoryCandidateForDeletionVisitor(40000000);
         //When
         int nodeUpTo100000TotalSize = visitor.perform(givenNode);
         //Then

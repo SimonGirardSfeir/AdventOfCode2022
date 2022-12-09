@@ -1,6 +1,6 @@
 package org.example.day7;
 
-public class CountTotalSizeVisitor implements Visitor {
+public class DirectorySizeVisitor implements Visitor {
     @Override
     public int perform(Node node) {
         return node.accept(this);

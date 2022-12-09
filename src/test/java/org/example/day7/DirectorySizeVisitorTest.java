@@ -6,11 +6,11 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CountTotalSizeVisitorTest {
-    Visitor countTotalSizeVisitor = new CountTotalSizeVisitor();
+class DirectorySizeVisitorTest {
+    Visitor directorySizeVisitor = new DirectorySizeVisitor();
 
     @Test
-    void perform_should_give_the_total_size_of_directory() {
+    void perform_should_give_total_size_of_directory() {
         //Given
         FileInformation fileI = FileInformation.of("584 i");
         DirectoryInformation dirE = new DirectoryInformation("e", List.of(fileI));
@@ -28,7 +28,7 @@ class CountTotalSizeVisitorTest {
         DirectoryInformation directory = new DirectoryInformation("", List.of(dirA, fileB, fileC, dirD));
 
         //When
-        int totalSizeDirectory = countTotalSizeVisitor.perform(directory);
+        int totalSizeDirectory = directorySizeVisitor.perform(directory);
 
         //Then
         assertThat(totalSizeDirectory).isEqualTo(48381165);

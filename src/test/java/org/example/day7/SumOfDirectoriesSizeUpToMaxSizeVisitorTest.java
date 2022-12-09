@@ -6,13 +6,12 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CountTotalSizeSmallestDirectoryBigEnoughToDeleteForFreeUpEnoughSpaceForSystemUpdateVisitorTest {
+class SumOfDirectoriesSizeUpToMaxSizeVisitorTest {
 
-    Visitor countTotalSizeSmallestDirectoryBigEnoughToDeleteForFreeUpEnoughSpaceForSystemUpdateVisitor =
-            new CountTotalSizeSmallestDirectoryBigEnoughToDeleteForFreeUpEnoughSpaceForSystemUpdateVisitor(40000000);
+    Visitor sumOfDirectoriesSizeUpToMaxSizeVisitor = new SumOfDirectoriesSizeUpToMaxSizeVisitor(100000);
 
     @Test
-    void perform_should_give_the_total_size_of_the_required_directory() {
+    void perform_should_give_the_sum_of_directories_size_with_a_size_up_to_the_fixed_limit() {
         //Given
         FileInformation fileI = FileInformation.of("584 i");
         DirectoryInformation dirE = new DirectoryInformation("e", List.of(fileI));
@@ -30,9 +29,10 @@ class CountTotalSizeSmallestDirectoryBigEnoughToDeleteForFreeUpEnoughSpaceForSys
         DirectoryInformation directory = new DirectoryInformation("", List.of(dirA, fileB, fileC, dirD));
 
         //When
-        int nodeTotalSize = countTotalSizeSmallestDirectoryBigEnoughToDeleteForFreeUpEnoughSpaceForSystemUpdateVisitor.perform(directory);
+        int totalSizeDirectory = sumOfDirectoriesSizeUpToMaxSizeVisitor.perform(directory);
 
         //Then
-        assertThat(nodeTotalSize).isEqualTo(24933642);
+        assertThat(totalSizeDirectory).isEqualTo(95437);
     }
+
 }

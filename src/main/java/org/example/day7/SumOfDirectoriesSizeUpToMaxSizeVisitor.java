@@ -2,12 +2,12 @@ package org.example.day7;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class CountTotalSizeLimitedDirectoriesVisitor implements Visitor {
+public class SumOfDirectoriesSizeUpToMaxSizeVisitor implements Visitor {
 
     private final int directoryMaxSize;
     private final AtomicInteger counter = new AtomicInteger(0);
 
-    public CountTotalSizeLimitedDirectoriesVisitor(int directoryMaxSize) {
+    public SumOfDirectoriesSizeUpToMaxSizeVisitor(int directoryMaxSize) {
         this.directoryMaxSize = directoryMaxSize;
     }
 

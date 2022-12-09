@@ -2,7 +2,6 @@ package org.example.day9;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 public final class Ground {
@@ -97,26 +96,4 @@ public final class Ground {
     public Position head() {
         return head;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (Ground) obj;
-        return Objects.equals(this.tail, that.tail) &&
-                Objects.equals(this.head, that.head);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(tail, head);
-    }
-
-    @Override
-    public String toString() {
-        return "Ground[" +
-                "tail=" + tail + ", " +
-                "head=" + head + ']';
-    }
-
 }

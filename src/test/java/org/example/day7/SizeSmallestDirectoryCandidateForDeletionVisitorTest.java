@@ -6,12 +6,12 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CountTotalSizeLimitedDirectoriesVisitorTest {
+class SizeSmallestDirectoryCandidateForDeletionVisitorTest {
 
-    Visitor countTotalSizeLimitedDirectoriesVisitor = new CountTotalSizeLimitedDirectoriesVisitor(100000);
+    Visitor sizeSmallestDirectoryCandidateForDeletionVisitor = new SizeSmallestDirectoryCandidateForDeletionVisitor(40000000);
 
     @Test
-    void perform_should_give_the_sum_of__total_size_of_all_directories_with_size_up_to_100000() {
+    void perform_should_give_the_total_size_of_the_required_directory() {
         //Given
         FileInformation fileI = FileInformation.of("584 i");
         DirectoryInformation dirE = new DirectoryInformation("e", List.of(fileI));
@@ -29,10 +29,9 @@ class CountTotalSizeLimitedDirectoriesVisitorTest {
         DirectoryInformation directory = new DirectoryInformation("", List.of(dirA, fileB, fileC, dirD));
 
         //When
-        int totalSizeDirectory = countTotalSizeLimitedDirectoriesVisitor.perform(directory);
+        int nodeTotalSize = sizeSmallestDirectoryCandidateForDeletionVisitor.perform(directory);
 
         //Then
-        assertThat(totalSizeDirectory).isEqualTo(95437);
+        assertThat(nodeTotalSize).isEqualTo(24933642);
     }
-
 }

@@ -2,13 +2,13 @@ package org.example.day7;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class CountTotalSizeSmallestDirectoryBigEnoughToDeleteForFreeUpEnoughSpaceForSystemUpdateVisitor implements Visitor {
+public class SizeSmallestDirectoryCandidateForDeletionVisitor implements Visitor {
 
     private final int maxDiskSpaceForUpdate;
     private int spaceNeedToFreeUp;
     private final AtomicInteger counter = new AtomicInteger(0);
 
-    public CountTotalSizeSmallestDirectoryBigEnoughToDeleteForFreeUpEnoughSpaceForSystemUpdateVisitor(int maxDiskSpaceForUpdate) {
+    public SizeSmallestDirectoryCandidateForDeletionVisitor(int maxDiskSpaceForUpdate) {
         this.maxDiskSpaceForUpdate = maxDiskSpaceForUpdate;
     }
 

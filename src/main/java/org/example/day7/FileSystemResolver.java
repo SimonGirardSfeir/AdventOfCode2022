@@ -28,9 +28,6 @@ public class FileSystemResolver {
                         .filter(node -> node.name().equals(currentDirectoryName)).findFirst().orElseThrow(InvalidDataFromFile::new);
                 nodeByDepths.add(depth, currentDirectory);
                 currentLine = lines.get(++i);
-                if (currentLine.contains("$ ls")) {
-                    i = feedDirectoryWithListedElementAndUpdateIndex(i, currentDirectory, lines);
-                }
             }
             if (currentLine.contains("$ cd ..")) {
                 depth--;
