@@ -1,8 +1,6 @@
 package org.example.day9;
 
 import org.example.LineExtractor;
-import org.example.day8.Forest;
-import org.example.day8.ForestResolver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class GroudResolverTest {
+class GroundResolverTest {
 
     private List<String> lines;
 
@@ -23,12 +21,23 @@ class GroudResolverTest {
     @Test
     void resolve_part1_of_day9_problem() {
         //Given
-        List<Instruction> givenInstructions = GroudResolver.getInstructionFromLines(lines);
-        Ground givenGround = new Ground(new Position(0,0), new Position(0,0));
+        List<Instruction> givenInstructions = GroundResolver.getInstructionFromLines(lines);
+        Ground givenGround = new Ground(1);
         //When
         int numberOfPositionsVisitedByTail = givenGround.countPositionsVisited(givenInstructions);
         //Then
         assertThat(numberOfPositionsVisitedByTail).isEqualTo(6269);
+    }
+
+    @Test
+    void resolve_part2_of_day9_problem() {
+        //Given
+        List<Instruction> givenInstructions = GroundResolver.getInstructionFromLines(lines);
+        Ground givenGround = new Ground(9);
+        //When
+        int numberOfPositionsVisitedByTail = givenGround.countPositionsVisited(givenInstructions);
+        //Then
+        assertThat(numberOfPositionsVisitedByTail).isEqualTo(2557);
     }
 
 }

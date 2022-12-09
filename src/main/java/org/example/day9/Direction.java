@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Direction {
-    RIGHT("R"), LEFT("L"), DOWN("D"), UP("U");
+    RIGHT("R"), LEFT("L"), DOWN("D"), UP("U"), UPLEFT("UL"),
+    UPRIGHT("UR"), DOWNLEFT("DL"), DOWNRIGHT("DR");
 
     private static final Map<String, Direction> BY_LABEL = new HashMap<>();
 

@@ -2,8 +2,8 @@ package org.example.day9;
 
 import java.util.List;
 
-public class GroudResolver {
-    private GroudResolver(){
+public class GroundResolver {
+    private GroundResolver(){
     }
 
     public static List<Instruction> getInstructionFromLines(List<String> lines){
