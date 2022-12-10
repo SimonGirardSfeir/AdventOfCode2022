@@ -27,7 +27,7 @@ public class FileSystemResolver {
                 currentDirectory = currentDirectory.subElements().stream()
                         .filter(node -> node.name().equals(currentDirectoryName)).findFirst().orElseThrow(InvalidDataFromFile::new);
                 nodeByDepths.add(depth, currentDirectory);
-                currentLine = lines.get(++i);
+                i++;
             }
             if (currentLine.contains("$ cd ..")) {
                 depth--;
@@ -46,11 +46,10 @@ public class FileSystemResolver {
         String currentLine = lines.get(++index);
         while (!currentLine.contains("$")) {
             List<Node> currentDirectoryNodes = currentDirectory.subElements();
-            if (!currentLine.contains("dir")) {
+            if (!currentLine.contains("dir"))
                 currentDirectoryNodes.add(FileInformation.of(currentLine));
-            } else {
+            else
                 currentDirectoryNodes.add(DirectoryInformation.of(currentLine.split(" ")[1], new ArrayList<>()));
-            }
             if (index < lines.size() -1)
                 currentLine = lines.get(++index);
             else {
