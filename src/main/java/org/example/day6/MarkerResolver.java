@@ -12,6 +12,7 @@ public class MarkerResolver {
     public static int getFirstMarker(String datastreamBuffer, int markerLength) {
         Set<Character> tempSet = new HashSet<>();
         List<Character> list = new ArrayList<>();
+        int firstMarker = 0;
         for(int i = 0; i <datastreamBuffer.length(); i++) {
             Character currentCharacter = datastreamBuffer.charAt(i);
             list.add(currentCharacter);

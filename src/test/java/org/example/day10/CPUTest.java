@@ -12,30 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CPUTest {
 
     @Test
-    void applyCPUInstructions_should_set_CPU_in_the_expected_state() {
-        //Given
-        CPUInstruction cpuInstruction1 = CPUInstruction.of("noop");
-        CPUInstruction cpuInstruction2 = CPUInstruction.of("addx 3");
-        CPUInstruction cpuInstruction3 = CPUInstruction.of("addx -5");
-        List<CPUInstruction> givenCPUInstructions = List.of(cpuInstruction1, cpuInstruction2, cpuInstruction3);
-        CPU givenCPU = new CPU();
-
-        //When
-        givenCPU.applyCPUInstructions(givenCPUInstructions);
-
-        //Then
-        Map<Integer, Integer> expectedRegisterHistory = new HashMap<>();
-        expectedRegisterHistory.put(1,1);
-        expectedRegisterHistory.put(2,1);
-        expectedRegisterHistory.put(3,1);
-        expectedRegisterHistory.put(4,4);
-        expectedRegisterHistory.put(5,4);
-        expectedRegisterHistory.put(6,-1);
-        CPU expectedCPU = new CPU(-1, 6, expectedRegisterHistory);
-        assertThat(givenCPU).isEqualTo(expectedCPU);
-    }
-
-    @Test
     void getSignalStrengthsSum_should_give_sum_of_given_signal_strength(){
         //Given
         String givenInput = """

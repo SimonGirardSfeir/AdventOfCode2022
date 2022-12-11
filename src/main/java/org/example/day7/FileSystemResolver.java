@@ -9,7 +9,7 @@ public class FileSystemResolver {
     private FileSystemResolver() {
     }
 
-    public static DirectoryInformation getFileSystemFromLines(List<String> lines) {
+    public static DirectoryInformation getFileSystemFromLines(List<String> lines) throws InvalidDataFromFile {
         int depth = 0;
         List<Node> nodeByDepths = new ArrayList<>();
         DirectoryInformation directoryInformation = new DirectoryInformation("", new ArrayList<>());
@@ -25,7 +25,8 @@ public class FileSystemResolver {
                 depth++;
                 String currentDirectoryName = currentLine.split(" ")[2];
                 currentDirectory = currentDirectory.subElements().stream()
-                        .filter(node -> node.name().equals(currentDirectoryName)).findFirst().orElseThrow(InvalidDataFromFile::new);
+                        .filter(node -> node.name().equals(currentDirectoryName)).findFirst()
+                        .orElseThrow(InvalidDataFromFile::new);
                 nodeByDepths.add(depth, currentDirectory);
                 i++;
             }

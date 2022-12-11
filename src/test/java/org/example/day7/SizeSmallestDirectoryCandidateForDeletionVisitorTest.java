@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class SizeSmallestDirectoryCandidateForDeletionVisitorTest {
 
-    final Visitor sizeSmallestDirectoryCandidateForDeletionVisitor = new SizeSmallestDirectoryCandidateForDeletionVisitor(40000000);
+    private final Visitor sizeSmallestDirectoryCandidateForDeletionVisitor = new SizeSmallestDirectoryCandidateForDeletionVisitor(40000000);
 
     @Test
     void perform_should_give_the_total_size_of_the_required_directory() {

@@ -11,20 +11,14 @@ import static org.example.day10.InstructionType.NOOP;
 public class CPU {
 
     private static final String INITIAL_LINE = "........................................";
-    int register;
-    int currentCycle;
+    private int register;
+    private int currentCycle;
 
     private final Map<Integer, Integer> registerHistory;
     public CPU() {
         this.register = 1;
         this.currentCycle = 1;
         this.registerHistory = new HashMap<>();
-    }
-
-    public CPU(int register, int currentCycle, Map<Integer, Integer> registerHistory) {
-        this.register = register;
-        this.currentCycle = currentCycle;
-        this.registerHistory = registerHistory;
     }
 
     public void applyCPUInstructions(List<CPUInstruction> cpuInstructions) {
@@ -101,26 +95,16 @@ public class CPU {
         }
     }
     private String drawPixel(List<String> image, String currentLine, int currentIndex, int currentRow) {
+        String drawnLine = currentLine;
         if(isInSpritePosition(currentIndex)) {
-            StringBuilder stringBuilderToReplacePixel = new StringBuilder(currentLine);
+            StringBuilder stringBuilderToReplacePixel = new StringBuilder(drawnLine);
             stringBuilderToReplacePixel.setCharAt(currentIndex, '#');
             image.set(currentRow, stringBuilderToReplacePixel.toString());
-            return stringBuilderToReplacePixel.toString();
+            drawnLine =  stringBuilderToReplacePixel.toString();
         }
-        return currentLine;
+        return drawnLine;
     }
     private boolean isInSpritePosition(int currentIndex) {
         return Math.abs(register-currentIndex) < 2;
-    }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CPU cpu = (CPU) o;
-        return register == cpu.register && currentCycle == cpu.currentCycle && Objects.equals(registerHistory, cpu.registerHistory);
-    }
-    @Override
-    public int hashCode() {
-        return Objects.hash(register, currentCycle, registerHistory);
     }
 }

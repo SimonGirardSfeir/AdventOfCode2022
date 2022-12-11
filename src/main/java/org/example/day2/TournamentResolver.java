@@ -9,7 +9,7 @@ public class TournamentResolver {
     private TournamentResolver() {
     }
 
-    public static Tournament getTournamentFromLines(List<String> lines) {
+    public static Tournament getTournamentFromLines(List<String> lines) throws InvalidDataFromFile {
         List<Round> rounds = new ArrayList<>();
         Tournament tournament = new Tournament(rounds);
 
@@ -31,7 +31,7 @@ public class TournamentResolver {
         return tournament;
 
     }
-    public static Tournament getTournamentType2FromLines(List<String> lines) {
+    public static Tournament getTournamentType2FromLines(List<String> lines) throws InvalidDataFromFile {
         List<Round> rounds = new ArrayList<>();
         Tournament tournament = new Tournament(rounds);
 
@@ -52,7 +52,7 @@ public class TournamentResolver {
         return tournament;
 
     }
-    private static Shape getOpponentShape(String leftPartLine) {
+    private static Shape getOpponentShape(String leftPartLine) throws InvalidDataFromFile {
         Shape opponentShape;
         switch (leftPartLine) {
             case "A" -> opponentShape = Shape.ROCK;

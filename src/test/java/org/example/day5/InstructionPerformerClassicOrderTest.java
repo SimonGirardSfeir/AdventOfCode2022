@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class InstructionPerformerClassicOrderTest {
 
-    final InstructionPerformer instructionPerformer = new InstructionPerformerClassicOrder();
+    private final InstructionPerformer instructionPerformer = new InstructionPerformerClassicOrder();
 
     @Test
     void applyInstructions_should_apply_instruction_to_stack_inventory_rightFully_and_send_Message() {

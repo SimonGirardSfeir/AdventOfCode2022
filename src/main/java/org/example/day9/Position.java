@@ -14,7 +14,7 @@ public final class Position {
     private int y;
     private Position previous;
 
-    public Position(int x, int y) {
+    private Position(int x, int y) {
         this.x = x;
         this.y = y;
     }
