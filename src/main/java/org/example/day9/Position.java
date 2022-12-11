@@ -14,16 +14,16 @@ public final class Position {
     private int y;
     private Position previous;
 
-    private Position(int x, int y) {
-        this.x = x;
-        this.y = y;
+    private Position() {
+        this.x = 0;
+        this.y = 0;
     }
 
     public static Position of(int ropeSize) {
-        Position position = new Position(0, 0);
+        Position position = new Position();
         Position currentPosition = position;
         while(ropeSize > 0) {
-            currentPosition.setPrevious(new Position(0,0));
+            currentPosition.previous = new Position();
             currentPosition = currentPosition.previous;
             ropeSize--;
         }
@@ -100,10 +100,6 @@ public final class Position {
     }
     private boolean isPreviousPositionCandidateToApplyDirection() {
         return previous != null && isCurrentPositionTouchingPrevious();
-    }
-
-    private void setPrevious(Position position) {
-        this.previous = position;
     }
 
     @Override

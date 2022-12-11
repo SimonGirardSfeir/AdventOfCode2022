@@ -11,7 +11,7 @@ public record Inventory(List<FoodBag> foodBags) {
     public List<FoodBag> getTop3FoodBagsWithMostCalories() {
         return foodBags.stream()
                 .sorted(Comparator.comparing(FoodBag::getFootBagTotalCalories).reversed())
-                .limit(3)
+                .limit(3L)
                 .toList();
     }
     public int computeTotalCaloriesFromTop3FoodBagsWithMostCalories() {

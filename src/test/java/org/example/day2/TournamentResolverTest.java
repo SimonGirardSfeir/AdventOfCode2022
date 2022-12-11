@@ -1,7 +1,6 @@
 package org.example.day2;
 
 import org.example.LineExtractor;
-import org.example.exception.InvalidDataFromFile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +19,7 @@ class TournamentResolverTest {
     }
 
     @Test
-    void resolve_part1_of_day2_problem() throws InvalidDataFromFile {
+    void resolve_part1_of_day2_problem() {
         Tournament tournament = TournamentResolver.getTournamentFromLines(lines);
         int tournamentScore = tournament.computeTournamentScore();
 
@@ -28,7 +27,7 @@ class TournamentResolverTest {
     }
 
     @Test
-    void resolve_part2_of_day2_problem() throws InvalidDataFromFile {
+    void resolve_part2_of_day2_problem() {
         Tournament tournament = TournamentResolver.getTournamentType2FromLines(lines);
         int tournamentScore = tournament.computeTournamentScore();
 

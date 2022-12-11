@@ -9,10 +9,10 @@ public record DirectoryInformation(String name, List<Node> subElements) implemen
     public static DirectoryInformation of(String name, List<String> lines) {
         List<Node> subElements = new ArrayList<>();
         for (String line : lines) {
-            if (!line.contains("dir")) {
-                subElements.add(FileInformation.of(line));
-            } else {
+            if (line.contains("dir")) {
                 subElements.add(DirectoryInformation.of(line.split(" ")[1], new ArrayList<>()));
+            } else {
+                subElements.add(FileInformation.of(line));
             }
         }
         return new DirectoryInformation(name, subElements);

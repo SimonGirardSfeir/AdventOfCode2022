@@ -10,8 +10,8 @@ public enum Direction {
     private static final Map<String, Direction> BY_LABEL = new HashMap<>();
 
     static {
-        for(Direction d : values())
-            BY_LABEL.put(d.label, d);
+        for(Direction direction : values())
+            BY_LABEL.put(direction.label, direction);
     }
 
     private final String label;

@@ -1,7 +1,6 @@
 package org.example.day7;
 
 import org.example.LineExtractor;
-import org.example.exception.InvalidDataFromFile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +19,7 @@ class FileSystemResolverTest {
     }
 
     @Test
-    void getFileSystemFromLines_should_gives_expected_file_system_from_input_lines() throws InvalidDataFromFile {
+    void getFileSystemFromLines_should_gives_expected_file_system_from_input_lines() {
         //Given
         List<String> givenLines = List.of("$ cd /","$ ls","dir a","14848514 b.txt","8504156 c.dat","dir d","$ cd a",
                 "$ ls","dir e","29116 f","2557 g","62596 h.lst","$ cd e","$ ls","584 i","$ cd ..","$ cd ..","$ cd d","$ ls",
@@ -48,7 +47,7 @@ class FileSystemResolverTest {
     }
 
     @Test
-    void resolve_part1_of_day7_problem() throws InvalidDataFromFile {
+    void resolve_part1_of_day7_problem() {
         //Given
         Node givenNode = FileSystemResolver.getFileSystemFromLines(lines);
         Visitor visitor = new SumOfDirectoriesSizeUpToMaxSizeVisitor(100000);
@@ -59,7 +58,7 @@ class FileSystemResolverTest {
     }
 
     @Test
-    void resolve_part2_of_day7_problem() throws InvalidDataFromFile {
+    void resolve_part2_of_day7_problem() {
         //Given
         Node givenNode = FileSystemResolver.getFileSystemFromLines(lines);
         Visitor visitor = new SizeSmallestDirectoryCandidateForDeletionVisitor(40000000);

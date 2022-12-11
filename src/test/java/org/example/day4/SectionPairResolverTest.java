@@ -27,7 +27,7 @@ class SectionPairResolverTest {
         long numberOfSectionPairsWithOneRangeFullyContainingTheOther = sectionPairInventory.countSectionPairsWithOneRangeFullyContainingTheOther();
 
         //Then
-        assertThat(numberOfSectionPairsWithOneRangeFullyContainingTheOther).isEqualTo(450);
+        assertThat(numberOfSectionPairsWithOneRangeFullyContainingTheOther).isEqualTo(450L);
     }
 
     @Test
@@ -39,6 +39,6 @@ class SectionPairResolverTest {
         long numberOfSectionPairsWithOneRangeFullyContainingTheOther = sectionPairInventory.countSectionPairsWithOverlap();
 
         //Then
-        assertThat(numberOfSectionPairsWithOneRangeFullyContainingTheOther).isEqualTo(837);
+        assertThat(numberOfSectionPairsWithOneRangeFullyContainingTheOther).isEqualTo(837L);
     }
 }

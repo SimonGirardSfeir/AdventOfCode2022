@@ -9,7 +9,7 @@ public class FileSystemResolver {
     private FileSystemResolver() {
     }
 
-    public static DirectoryInformation getFileSystemFromLines(List<String> lines) throws InvalidDataFromFile {
+    public static DirectoryInformation getFileSystemFromLines(List<String> lines) {
         int depth = 0;
         List<Node> nodeByDepths = new ArrayList<>();
         DirectoryInformation directoryInformation = new DirectoryInformation("", new ArrayList<>());
@@ -47,10 +47,10 @@ public class FileSystemResolver {
         String currentLine = lines.get(++index);
         while (!currentLine.contains("$")) {
             List<Node> currentDirectoryNodes = currentDirectory.subElements();
-            if (!currentLine.contains("dir"))
-                currentDirectoryNodes.add(FileInformation.of(currentLine));
-            else
+            if (currentLine.contains("dir"))
                 currentDirectoryNodes.add(DirectoryInformation.of(currentLine.split(" ")[1], new ArrayList<>()));
+            else
+                currentDirectoryNodes.add(FileInformation.of(currentLine));
             if (index < lines.size() -1)
                 currentLine = lines.get(++index);
             else {
