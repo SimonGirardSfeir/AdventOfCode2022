@@ -7,7 +7,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DirectorySizeVisitorTest {
-    Visitor directorySizeVisitor = new DirectorySizeVisitor();
+    final Visitor directorySizeVisitor = new DirectorySizeVisitor();
 
     @Test
     void perform_should_give_total_size_of_directory() {

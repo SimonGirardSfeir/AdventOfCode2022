@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public record Section(int start, int end) {
     public static Section of(String line) {
-        Integer[] splitedLimits = Arrays.stream(line.split("-")).map(Integer::valueOf).toArray(Integer[]::new);
-        return new Section(splitedLimits[0],splitedLimits[1]);
+        Integer[] splitLimits = Arrays.stream(line.split("-")).map(Integer::valueOf).toArray(Integer[]::new);
+        return new Section(splitLimits[0],splitLimits[1]);
     }
 }

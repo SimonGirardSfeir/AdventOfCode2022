@@ -7,8 +7,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public record FileInformation(String name, int fileSize) implements Node {
 
     public static FileInformation of(String line) {
-        String[] splitedLine = line.split(" ");
-        return new FileInformation(splitedLine[1], Integer.parseInt(splitedLine[0]));
+        String[] splitLine = line.split(" ");
+        return new FileInformation(splitLine[1], Integer.parseInt(splitLine[0]));
     }
 
     @Override

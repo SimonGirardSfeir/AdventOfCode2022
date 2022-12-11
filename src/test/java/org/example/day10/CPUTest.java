@@ -347,6 +347,11 @@ class CPUTest {
                 noop
                 noop
                 noop""";
+        /*
+            I'm also testing file parsing here (not the real intent of the test),
+            but otherwise, I should have manually created ~150 CPU instruction
+            by hand in unit test rather than just copy-paste.
+         */
         List<CPUInstruction> givenCpuInstructions = CPUResolver.getCPUInstructionFromLines
                 (Arrays.asList(givenInput.split("\\n")));
         CPU givenCpu = new CPU();

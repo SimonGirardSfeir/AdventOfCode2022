@@ -14,11 +14,11 @@ public class TournamentResolver {
         Tournament tournament = new Tournament(rounds);
 
         for(String line : lines) {
-            String[] splittedLine = lineSpliter(line);
+            String[] splitLine = lineSplit(line);
             Shape playerShape;
             Shape opponentShape;
-            opponentShape = getOpponentShape(splittedLine[0]);
-            switch (splittedLine[1]) {
+            opponentShape = getOpponentShape(splitLine[0]);
+            switch (splitLine[1]) {
                 case "X" -> playerShape = Shape.ROCK;
                 case "Y" -> playerShape = Shape.PAPER;
                 case "Z" -> playerShape = Shape.SCISSORS;
@@ -36,10 +36,10 @@ public class TournamentResolver {
         Tournament tournament = new Tournament(rounds);
 
         for(String line : lines) {
-            String[] splittedLine = lineSpliter(line);
+            String[] splitLine = lineSplit(line);
             Shape playerShape;
-            Shape opponentShape = getOpponentShape(splittedLine[0]);
-            switch (splittedLine[1]) {
+            Shape opponentShape = getOpponentShape(splitLine[0]);
+            switch (splitLine[1]) {
                 case "X" -> playerShape = opponentShape.winAgainst();
                 case "Y" -> playerShape = opponentShape;
                 case "Z" -> playerShape = opponentShape.loseAgainst();
@@ -62,7 +62,7 @@ public class TournamentResolver {
         }
         return opponentShape;
     }
-    private static String[] lineSpliter(String line) {
+    private static String[] lineSplit(String line) {
         return line.split(" ");
     }
 }

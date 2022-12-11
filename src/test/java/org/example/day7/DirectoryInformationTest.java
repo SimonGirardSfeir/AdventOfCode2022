@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class DirectoryInformationTest {
 
-    private static Stream<Arguments> inputDatasForDirectory() {
+    private static Stream<Arguments> inputDataForDirectory() {
         FileInformation fileInformation1 = FileInformation.of("14848514 b.txt");
         FileInformation fileInformation2 = FileInformation.of("8504156 c.dat");
         DirectoryInformation dirA = new DirectoryInformation("a", new ArrayList<>());
@@ -30,7 +30,7 @@ class DirectoryInformationTest {
         );
     }
     @ParameterizedTest
-    @MethodSource("inputDatasForDirectory")
+    @MethodSource("inputDataForDirectory")
     void of_should_give_directory_information_from_lines_and_parent_directory(String givenDirectoryName, List<String> givenLines,
                                                                               DirectoryInformation expectedDirectory) {
         DirectoryInformation directoryInformation = DirectoryInformation.of(givenDirectoryName, givenLines);

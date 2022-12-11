@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class RucksackTest {
 
     @Test
-    void of_should_give_a_rukcsack_with_two_compartment_of_equal_length() {
+    void of_should_give_a_rucksack_with_two_compartment_of_equal_length() {
         //Given
         String givenLine = "vJrwpWtwJgWrhcsFMMfFFhFp";
 
@@ -24,7 +24,7 @@ class RucksackTest {
         assertThat(rucksack).isEqualTo(expectedRucksack);
     }
 
-    private static Stream<Arguments> ruckascks() {
+    private static Stream<Arguments> rucksacks() {
         return Stream.of(
                 Arguments.of(Rucksack.of("vJrwpWtwJgWrhcsFMMfFFhFp"), 'p'),
                 Arguments.of(Rucksack.of("jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"), 'L'),
@@ -35,7 +35,7 @@ class RucksackTest {
         );
     }
     @ParameterizedTest
-    @MethodSource("ruckascks")
+    @MethodSource("rucksacks")
     void getCommonItem_should_give_the_item_that_appears_in_both_rucksack_compartment(Rucksack givenRucksack, Character expectedCommonItem) {
         //When
         Character commonItem = givenRucksack.getCommonItem();

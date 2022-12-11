@@ -29,7 +29,7 @@ class SectionPairInventoryTest {
     }
 
     @Test
-    void countSectionPairswithOverlap_should_give_the_number_of_section_pairs_with_overlap() {
+    void countSectionPairsWithOverlap_should_give_the_number_of_section_pairs_with_overlap() {
         //Given
         SectionPair sectionPair1 = SectionPair.of("2-4,6-8");
         SectionPair sectionPair2 = SectionPair.of("2-3,4-5");

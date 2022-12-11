@@ -5,11 +5,10 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class InstructionPerformerReverseOrderTest {
 
-    InstructionPerformer instructionPerformer = new InstructionPerformerReverseOrder();
+    final InstructionPerformer instructionPerformer = new InstructionPerformerReverseOrder();
 
     @Test
     void applyInstructions_should_apply_instruction_to_stack_inventory_rightFully_and_send_Message() {

@@ -24,8 +24,10 @@ class CPUResolverTest {
         List<CPUInstruction> givenInstructions = CPUResolver.getCPUInstructionFromLines(lines);
         CPU givenCpu = new CPU();
         givenCpu.applyCPUInstructions(givenInstructions);
+
         //When
         int sumSignalStrength = givenCpu.computeSumSignalStrength(20, 40, 5);
+
         //Then
         assertThat(sumSignalStrength).isEqualTo(13860);
     }
@@ -35,6 +37,7 @@ class CPUResolverTest {
         //Given
         List<CPUInstruction> givenInstructions = CPUResolver.getCPUInstructionFromLines(lines);
         CPU givenCpu = new CPU();
+
         //When
         List<String> image = givenCpu.renderImage(givenInstructions);
 

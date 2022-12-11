@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class SumOfDirectoriesSizeUpToMaxSizeVisitorTest {
 
-    Visitor sumOfDirectoriesSizeUpToMaxSizeVisitor = new SumOfDirectoriesSizeUpToMaxSizeVisitor(100000);
+    final Visitor sumOfDirectoriesSizeUpToMaxSizeVisitor = new SumOfDirectoriesSizeUpToMaxSizeVisitor(100000);
 
     @Test
     void perform_should_give_the_sum_of_directories_size_with_a_size_up_to_the_fixed_limit() {
