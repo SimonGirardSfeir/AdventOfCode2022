@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
+import static org.example.day12.PlanResolver.isReachable;
+
 public final class Plan {
     private final char[][] points;
 
@@ -35,6 +37,28 @@ public final class Plan {
         return new Plan(points);
     }
 
+    public int findPathLengthForUniqueSource(char startingCharacter, char endingCharacter) {
+        Position startPosition = findUniquePosition(startingCharacter);
+        Position endingPosition = findUniquePosition(endingCharacter);
+
+        generatePositionsAndAdjacent(false);
+
+        Set<Position> path = endingPosition != null ?
+                getPath(startPosition, List.of(endingPosition)) : Collections.emptySet();
+
+        return path.size() - 1;
+    }
+    public int findPathLengthForMultipleSource(char startingCharacter, char endingCharacter) {
+        Position startPosition = findUniquePosition(endingCharacter);
+        List<Position> endingPositions = findListPosition(startingCharacter);
+
+        generatePositionsAndAdjacent(true);
+
+        Set<Position> path = getPath(startPosition, endingPositions);
+
+        return path.size() - 1;
+    }
+
     private Position findUniquePosition(char value) {
         for (int i = 0; i < points.length; i++) {
             for (int j = 0; j < points[0].length; j++) {
@@ -57,76 +81,36 @@ public final class Plan {
         }
         return positions;
     }
-
-
-    public int findPathLengthForUniqueSource(char startingCharacter, char endingCharacter) {
+    private void generatePositionsAndAdjacent(boolean isReversePath) {
         int horizontalLength = points.length;
         int verticalLength = points[0].length;
-
-
         for (int i = 0; i < horizontalLength; i++) {
             for (int j = 0; j < verticalLength; j++) {
                 List<Position> adjacentPosition = new ArrayList<>();
                 Position position = new Position(i, j);
                 positionsAndAdjacent.put(position, adjacentPosition);
-                checkNorth(i, j, adjacentPosition, false);
-                checkSouth(i, j, adjacentPosition, false);
-                checkWest(i, j, adjacentPosition, false);
-                checkEast(i, j, adjacentPosition, false);
+                checkReachable(position, adjacentPosition, Direction.NORTH, isReversePath);
+                checkReachable(position, adjacentPosition, Direction.SOUTH, isReversePath);
+                checkReachable(position, adjacentPosition, Direction.WEST, isReversePath);
+                checkReachable(position, adjacentPosition, Direction.EAST, isReversePath);
             }
         }
-        Position startPosition = findUniquePosition(startingCharacter);
-        Position endingPosition = findUniquePosition(endingCharacter);
-
-        List<Position> path = endingPosition != null ?
-                getPathBFS(startPosition, List.of(endingPosition)) : Collections.emptyList();
-
-        return path.size() - 1;
     }
-
-    public int findPathLengthForMultipleSource(char startingCharacter, char endingCharacter) {
-        int horizontalLength = points.length;
-        int verticalLength = points[0].length;
-
-
-        for (int i = 0; i < horizontalLength; i++) {
-            for (int j = 0; j < verticalLength; j++) {
-                List<Position> adjacentPosition = new ArrayList<>();
-                Position position = new Position(i, j);
-                positionsAndAdjacent.put(position, adjacentPosition);
-                checkNorth(i, j, adjacentPosition, true);
-                checkSouth(i, j, adjacentPosition, true);
-                checkWest(i, j, adjacentPosition, true);
-                checkEast(i, j, adjacentPosition, true);
-            }
-        }
-        Position startPosition = findUniquePosition(endingCharacter);
-        List<Position> endingPositions = findListPosition(startingCharacter);
-
-        List<Position> path = getPathBFS(startPosition, endingPositions);
-
-
-        return path.size() - 1;
-    }
-
-    private List<Position> getPathBFS(Position startPosition, List<Position> endingPositions) {
+    private Set<Position> getPath(Position startPosition, List<Position> endingPositions) {
         boolean found = false;
         Set<Position> visited = new HashSet<>();
         visited.add(startPosition);
-
         Queue<Position> positionQueue = new ArrayDeque<>();
         positionQueue.add(startPosition);
-
         Map<Position, Position> parents = new HashMap<>();
         parents.put(startPosition, null);
-
-        Position target = null;
+        Position targetPosition = null;
 
         while(!positionQueue.isEmpty()) {
             Position currentPosition = positionQueue.remove();
 
             if(endingPositions.contains(currentPosition)) {
-                target = currentPosition;
+                targetPosition = currentPosition;
                 found = true;
                 break;
             }
@@ -142,9 +126,9 @@ public final class Plan {
             }
         }
 
-        List<Position> path = new ArrayList<>();
+        Set<Position> path = new HashSet<>();
         if(found) {
-            Position end = target;
+            Position end = targetPosition;
             path.add(end);
             while(parents.get(end) != null) {
                 path.add(parents.get(end));
@@ -154,30 +138,27 @@ public final class Plan {
 
         return path;
     }
-
-    private void checkNorth(int i, int j, List<Position> adjacentPositions, boolean reverse) {
-        if(j < points[0].length -1 && isNeighbor(points[i][j], points[i][j + 1], reverse))
-            adjacentPositions.add(new Position(i, j + 1));
-    }
-    private void checkSouth(int i, int j, List<Position> adjacentPositions, boolean reverse) {
-        if(j > 0 && isNeighbor(points[i][j], points[i][j - 1], reverse))
-            adjacentPositions.add(new Position(i, j - 1));
-    }
-    private void checkWest(int i, int j, List<Position> adjacentPositions, boolean reverse) {
-        if(i > 0 && isNeighbor(points[i][j], points[i-1][j], reverse))
-            adjacentPositions.add(new Position(i-1, j));
-    }
-    private void checkEast(int i, int j, List<Position> adjacentPositions, boolean reverse) {
-        if(i < points.length -1  && isNeighbor(points[i][j], points[i+1][j], reverse))
-            adjacentPositions.add(new Position(i+1, j));
-    }
-    private boolean isNeighbor(char source, char target, boolean reverse) {
-        if(reverse)
-            return (source - target < 2 && source != 'E') || (source == 'E' && target == 'z') ||
-                    ((source == 'a' || source == 'b') && target == 'S');
-        else
-            return (target - source < 2 && target != 'E') || target == 'S' || (source == 'S' && target == 'a')
-                || (source == 'z' && target == 'E');
+    private void checkReachable(Position currentPosition, List<Position> adjacentPositions, Direction direction, boolean reverse) {
+        int x = currentPosition.x();
+        int y = currentPosition.y();
+        switch (direction) {
+            case NORTH -> {
+                if(y < points[0].length -1 && isReachable(points[x][y], points[x][y + 1], reverse))
+                    adjacentPositions.add(new Position(x, y + 1));
+            }
+            case SOUTH -> {
+                if(y > 0 && isReachable(points[x][y], points[x][y - 1], reverse))
+                    adjacentPositions.add(new Position(x, y - 1));
+            }
+            case EAST -> {
+                if(x < points.length -1  && isReachable(points[x][y], points[x+1][y], reverse))
+                    adjacentPositions.add(new Position(x+1, y));
+            }
+            case WEST -> {
+                if(x > 0 && isReachable(points[x][y], points[x-1][y], reverse))
+                    adjacentPositions.add(new Position(x-1, y));
+            }
+        }
     }
 }
 
