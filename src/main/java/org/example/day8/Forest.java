@@ -112,4 +112,11 @@ public record Forest(Tree[][] trees) {
     public int hashCode() {
         return Arrays.deepHashCode(trees);
     }
+
+    @Override
+    public String toString() {
+        return "Forest{" +
+                "trees=" + Arrays.toString(trees) +
+                '}';
+    }
 }
