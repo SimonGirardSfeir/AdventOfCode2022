@@ -6,14 +6,14 @@ import java.util.Deque;
 import java.util.List;
 
 public record StackCratesInventory(List<Deque<Character>> stackCrates) {
-    public static StackCratesInventory of(List<String> givenLines) {
+    public static StackCratesInventory of(List<String> lines) {
         List<Deque<Character>> stackCratesToAdd = new ArrayList<>();
-        int biggestStackSize = givenLines.size();
-        int numberOfStacks = (givenLines.get(biggestStackSize -1).length() + 1)/4;
+        int biggestStackSize = lines.size();
+        int numberOfStacks = (lines.get(biggestStackSize -1).length() + 1)/4;
 
         populateStackListWithRightNumberOfEmptyStacks(stackCratesToAdd, numberOfStacks);
 
-        fillStacksOfStackList(givenLines, stackCratesToAdd, biggestStackSize);
+        fillStacksOfStackList(lines, stackCratesToAdd, biggestStackSize);
 
         return new StackCratesInventory(stackCratesToAdd);
     }
