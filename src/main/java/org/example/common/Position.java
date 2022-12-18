@@ -1,4 +1,4 @@
-package org.example.day12;
+package org.example.common;
 
 public record Position(int x, int y) {
 }
