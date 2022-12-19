@@ -20,9 +20,15 @@ public record Cave(Set<Position> rocks, Set<Position> sands, int maxDepth, int m
             Set<Position> positionsToPopulate = populateRocks(cornerPositions);
             rocks.addAll(positionsToPopulate);
         }
-        int maxDepth = rocks.stream().max(Comparator.comparing(Position::y)).orElseThrow(NoSuchElementException::new).y();
-        int maxLeft = rocks.stream().min(Comparator.comparing(Position::x)).orElseThrow(NoSuchElementException::new).x();
-        int maxRight = rocks.stream().max(Comparator.comparing(Position::x)).orElseThrow(NoSuchElementException::new).x();
+        int maxDepth = rocks.stream()
+                .max(Comparator.comparing(Position::y))
+                .orElseThrow(NoSuchElementException::new).y();
+        int maxLeft = rocks.stream()
+                .min(Comparator.comparing(Position::x))
+                .orElseThrow(NoSuchElementException::new).x();
+        int maxRight = rocks.stream()
+                .max(Comparator.comparing(Position::x))
+                .orElseThrow(NoSuchElementException::new).x();
         return new Cave(rocks, new HashSet<>(), maxDepth, maxLeft, maxRight);
     }
 

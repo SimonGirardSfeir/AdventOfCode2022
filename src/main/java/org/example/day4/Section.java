@@ -1,10 +1,7 @@
 package org.example.day4;
 
-import java.util.Arrays;
-
 public record Section(int start, int end) {
-    public static Section of(String line) {
-        Integer[] splitLimits = Arrays.stream(line.split("-")).map(Integer::valueOf).toArray(Integer[]::new);
-        return new Section(splitLimits[0],splitLimits[1]);
+    public static Section of(Integer[] limits) {
+        return new Section(limits[0],limits[1]);
     }
 }

@@ -2,7 +2,7 @@ package org.example.day10;
 
 import java.util.List;
 
-public class CPUResolver {
+public final class CPUResolver {
     private CPUResolver(){
     }
 

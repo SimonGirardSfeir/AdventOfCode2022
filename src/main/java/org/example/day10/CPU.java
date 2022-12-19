@@ -26,10 +26,10 @@ public class CPU {
     }
 
     private void applyCPUInstruction(CPUInstruction cpuInstruction) {
-        if (Objects.requireNonNull(cpuInstruction.instructionType()) == NOOP) {
+        if(cpuInstruction.instructionType() == NOOP) {
             registerHistory.put(currentCycle, register);
             currentCycle++;
-        } else if (cpuInstruction.instructionType() == InstructionType.ADDX) {
+        } else {
             registerHistory.put(currentCycle, register);
             currentCycle++;
             registerHistory.put(currentCycle, register);
@@ -72,7 +72,7 @@ public class CPU {
             registerHistory.put(currentCycle, register);
             drawPixel(image, currentLine, currentIndex, currentRow);
             currentCycle++;
-        } else if (cpuInstruction.instructionType() == InstructionType.ADDX) {
+        } else {
             registerHistory.put(currentCycle, register);
             currentLine = drawPixel(image, currentLine, currentIndex, currentRow);
             currentCycle++;

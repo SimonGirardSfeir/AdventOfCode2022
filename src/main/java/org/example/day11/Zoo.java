@@ -48,7 +48,9 @@ public record Zoo(List<Monkey> monkeys) {
          * not changing outcome of divisibility check.
          *
          */
-        final long monkeysDivisibilityCheckLCM = findLeastCommonMultiplicativeOfMonkeysDivisibilityCheck(monkeys().stream().map(Monkey::divisibleTest).toList());
+        List<Long> monkeysDivisibilityChecks = monkeys().stream().map(Monkey::divisibleTest).toList();
+        final long monkeysDivisibilityCheckLCM =
+                findLeastCommonMultiplicativeOfMonkeysDivisibilityCheck(monkeysDivisibilityChecks);
         int counter = numberOfRounds;
         while(counter > 0) {
             performRound(monkeysDivisibilityCheckLCM);

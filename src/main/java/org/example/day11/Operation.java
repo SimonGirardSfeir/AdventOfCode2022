@@ -11,8 +11,7 @@ public record Operation(int operand, Operator operator) {
         if("old".equals(splitLine[1])) {
             operand = 2;
             operator = SQUARE;
-        }
-        else {
+        } else {
             operand = Integer.parseInt(splitLine[1]);
             operator = Operator.valueOfLabel(splitLine[0]);
         }

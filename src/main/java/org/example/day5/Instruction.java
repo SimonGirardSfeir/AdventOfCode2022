@@ -4,6 +4,8 @@ public record Instruction(int numberOfElementToMove, int sourceStack, int target
     public static Instruction of(String line) {
         String[] splitLine = line.split(" ");
 
-        return new Instruction(Integer.parseInt(splitLine[1]), Integer.parseInt(splitLine[3]), Integer.parseInt(splitLine[5]));
+        return new Instruction(Integer.parseInt(splitLine[1]),
+                Integer.parseInt(splitLine[3]),
+                Integer.parseInt(splitLine[5]));
     }
 }

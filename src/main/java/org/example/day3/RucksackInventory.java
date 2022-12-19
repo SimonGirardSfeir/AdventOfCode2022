@@ -20,7 +20,8 @@ public record RucksackInventory(List<Rucksack> rucksacks) {
 
     public int computeTotalPriorityWithRucksacksGroupedByN(int groupSize) {
         return groupRucksacksByN(groupSize).stream()
-                .map(list -> list.stream().map(rucksack -> rucksack.firstCompartment() + rucksack.secondCompartment()).toList())
+                .map(list -> list.stream()
+                        .map(rucksack -> rucksack.firstCompartment() + rucksack.secondCompartment()).toList())
                 .map(RucksackResolver::getCommonItemBetweenLines)
                 .map(itemToPriorityMap::get)
                 .reduce(0, Integer::sum);

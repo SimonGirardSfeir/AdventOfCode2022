@@ -10,27 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class SectionPairTest {
 
-    private static Stream<Arguments> inputStrings() {
-        return Stream.of(
-                Arguments.of("2-4,6-8", new SectionPair(Section.of("2-4"),Section.of("6-8"))),
-                Arguments.of("2-3,4-5", new SectionPair(Section.of("2-3"),Section.of("4-5")))
-        );
-    }
-    @ParameterizedTest
-    @MethodSource("inputStrings")
-    void of_should_give_section_pair_from_input_string(String givenInput, SectionPair expectedSectionPair) {
-        //When
-        SectionPair section = SectionPair.of(givenInput);
-
-        //Then
-        assertThat(section).isEqualTo(expectedSectionPair);
-    }
-
     private static Stream<Arguments> inputSectionPairs() {
         return Stream.of(
-                Arguments.of(SectionPair.of("2-8,3-7"),true),
-                Arguments.of(SectionPair.of("6-6,4-6"),true),
-                Arguments.of(SectionPair.of("2-4,6-8"),false)
+                Arguments.of(new SectionPair(new Section(2,8), new Section(3,7)),true),
+                Arguments.of(new SectionPair(new Section(6,6), new Section(4,6)),true),
+                Arguments.of(new SectionPair(new Section(2,4), new Section(6,8)),false)
         );
     }
     @ParameterizedTest
@@ -47,12 +31,12 @@ class SectionPairTest {
 
     private static Stream<Arguments> inputSectionPairsBis() {
         return Stream.of(
-                Arguments.of(SectionPair.of("2-4,6-8"),false),
-                Arguments.of(SectionPair.of("2-3,4-5"),false),
-                Arguments.of(SectionPair.of("5-7,7-9"),true),
-                Arguments.of(SectionPair.of("2-8,3-7"),true),
-                Arguments.of(SectionPair.of("6-6,4-6"),true),
-                Arguments.of(SectionPair.of("2-6,4-8"),true)
+                Arguments.of(new SectionPair(new Section(2,4), new Section(6,8)),false),
+                Arguments.of(new SectionPair(new Section(2,4), new Section(6,8)),false),
+                Arguments.of(new SectionPair(new Section(5,7), new Section(7,9)),true),
+                Arguments.of(new SectionPair(new Section(2,8), new Section(3,7)),true),
+                Arguments.of(new SectionPair(new Section(6,6), new Section(4,6)),true),
+                Arguments.of(new SectionPair(new Section(2,6), new Section(4,8)),true)
         );
     }
     @ParameterizedTest

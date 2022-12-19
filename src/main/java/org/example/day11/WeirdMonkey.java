@@ -3,7 +3,8 @@ package org.example.day11;
 import java.util.List;
 
 public class WeirdMonkey extends Monkey {
-    public WeirdMonkey(int id, List<Item> items, Operation operation, long divisibleTest, int targetMonkeyIfTestSuccess, int targetMonkeyIfTestFails) {
+    public WeirdMonkey(int id, List<Item> items, Operation operation, long divisibleTest,
+                       int targetMonkeyIfTestSuccess, int targetMonkeyIfTestFails) {
         super(id, items, operation, divisibleTest, targetMonkeyIfTestSuccess, targetMonkeyIfTestFails);
     }
 
@@ -15,18 +16,10 @@ public class WeirdMonkey extends Monkey {
 
     @Override
     protected long affectWorryLevel(long worryLevel, Operation operation, long monkeysDivisibilityCheckLCM) {
-        if(Operator.ADDITION.equals(operation.operator())){
-            worryLevel = (worryLevel + operation.operand());
-            worryLevel %= monkeysDivisibilityCheckLCM;
-        }
-        else if(Operator.MULTIPLICATION.equals(operation.operator())) {
-            worryLevel = (worryLevel * operation.operand());
-            worryLevel %= monkeysDivisibilityCheckLCM;
-        }
-        else if(Operator.SQUARE.equals(operation.operator())) {
-            worryLevel = (worryLevel * worryLevel);
-            worryLevel %= monkeysDivisibilityCheckLCM;
-        }
-        return worryLevel;
+        return switch (operation.operator()) {
+            case ADDITION -> (worryLevel + operation.operand()) % monkeysDivisibilityCheckLCM;
+            case MULTIPLICATION -> (worryLevel * operation.operand()) % monkeysDivisibilityCheckLCM;
+            case SQUARE -> (worryLevel * worryLevel) % monkeysDivisibilityCheckLCM;
+        };
     }
 }

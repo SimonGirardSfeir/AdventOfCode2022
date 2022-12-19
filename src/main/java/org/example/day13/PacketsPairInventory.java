@@ -5,18 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public record PacketsPairInventory(List<PacketsPair> packetsPairs) {
-    public static PacketsPairInventory of(List<String> lines) {
-        List<PacketsPair> packetsPairs = new ArrayList<>();
-
-        for(int i = 0; i <= lines.size(); i ++) {
-            if((i+1) % 3 == 0) {
-                PacketsPair packetsPair = new PacketsPair(new Packet(lines.get(i-2)), new Packet(lines.get(i-1)));
-                packetsPairs.add(packetsPair);
-            }
-        }
-        return new PacketsPairInventory(packetsPairs);
-    }
-
     public int computeSumOfPairsInRightOrderIndexes() {
         int sumOfPairsInRightOrderIndexes = 0;
 
@@ -32,8 +20,12 @@ public record PacketsPairInventory(List<PacketsPair> packetsPairs) {
         int distressSignal2 = 0;
         Packet distressPacket1 = new Packet("[[2]]");
         Packet distressPacket2 = new Packet("[[6]]");
-        List<Packet> allPackets = packetsPairs.stream().map(PacketsPair::leftSide).collect(Collectors.toCollection(ArrayList::new));
-        List<Packet> rightPackets = packetsPairs.stream().map(PacketsPair::rightSide).collect(Collectors.toCollection(ArrayList::new));
+        List<Packet> allPackets = packetsPairs.stream()
+                .map(PacketsPair::leftSide)
+                .collect(Collectors.toCollection(ArrayList::new));
+        List<Packet> rightPackets = packetsPairs.stream()
+                .map(PacketsPair::rightSide)
+                .collect(Collectors.toCollection(ArrayList::new));
 
         allPackets.addAll(rightPackets);
         allPackets.add(distressPacket1);

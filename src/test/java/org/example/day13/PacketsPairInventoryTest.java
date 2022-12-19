@@ -11,52 +11,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class PacketsPairInventoryTest {
 
-    private static final Pattern PATTERN = Pattern.compile("\\n");
-    @Test
-    void of_should_give_packetsPairInventory_from_lines() {
-        //Given
-        String givenLines = """
-                [1,1,3,1,1]
-                [1,1,5,1,1]
-
-                [[1],[2,3,4]]
-                [[1],4]
-
-                [9]
-                [[8,7,6]]
-
-                [[4,4],4,4]
-                [[4,4],4,4,4]
-
-                [7,7,7,7]
-                [7,7,7]
-
-                []
-                [3]
-
-                [[[]]]
-                [[]]
-
-                [1,[2,[3,[4,[5,6,7]]]],8,9]
-                [1,[2,[3,[4,[5,6,0]]]],8,9]""";
-
-        //When
-        PacketsPairInventory packetsPairInventory = PacketsPairInventory.of(Arrays.asList(PATTERN.split(givenLines)));
-
-        //Then
-        PacketsPair packetsPair1 = new PacketsPair(new Packet("[1,1,3,1,1]"), new Packet("[1,1,5,1,1]"));
-        PacketsPair packetsPair2 = new PacketsPair(new Packet("[[1],[2,3,4]]"), new Packet("[[1],4]"));
-        PacketsPair packetsPair3 = new PacketsPair(new Packet("[9]"), new Packet("[[8,7,6]]"));
-        PacketsPair packetsPair4 = new PacketsPair(new Packet("[[4,4],4,4]"), new Packet("[[4,4],4,4,4]"));
-        PacketsPair packetsPair5 = new PacketsPair(new Packet("[7,7,7,7]"), new Packet("[7,7,7]"));
-        PacketsPair packetsPair6 = new PacketsPair(new Packet("[]"), new Packet("[3]"));
-        PacketsPair packetsPair7 = new PacketsPair(new Packet("[[[]]]"), new Packet("[[]]"));
-        PacketsPair packetsPair8 = new PacketsPair(new Packet("[1,[2,[3,[4,[5,6,7]]]],8,9]"), new Packet("[1,[2,[3,[4,[5,6,0]]]],8,9]"));
-        PacketsPairInventory expectedPacketsPairInventory = new PacketsPairInventory(List.of(packetsPair1, packetsPair2, packetsPair3, packetsPair4, packetsPair5, packetsPair6,
-                packetsPair7, packetsPair8));
-        assertThat(packetsPairInventory).isEqualTo(expectedPacketsPairInventory);
-    }
-
     @Test
     void computeSumOfPairsInRightOrderIndexes_should_give_sum_of_the_indices_of_pairs_in_right_order() {
         //Given

@@ -3,7 +3,7 @@ package org.example.day5;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StackCratesResolver {
+public final class StackCratesResolver {
     private StackCratesResolver() {
 
     }

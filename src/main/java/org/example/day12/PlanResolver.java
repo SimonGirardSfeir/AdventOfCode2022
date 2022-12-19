@@ -2,7 +2,7 @@ package org.example.day12;
 
 import java.util.List;
 
-public class PlanResolver {
+public final class PlanResolver {
     private PlanResolver(){
     }
 

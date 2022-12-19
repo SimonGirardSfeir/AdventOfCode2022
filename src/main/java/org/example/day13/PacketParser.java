@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import static org.example.day13.PacketChecking.isANumberList;
 
-public class PacketParser {
+public final class PacketParser {
     private PacketParser(){
     }
 
@@ -33,17 +33,16 @@ public class PacketParser {
                 temp.add(c);
                 destructuredContent.add(temp.stream().map(String::valueOf).collect(Collectors.joining()));
                 temp = new ArrayList<>();
-            }  else if(content.charAt(i) == ']') {
+            } else if(content.charAt(i) == ']') {
                 deque.pop();
                 temp.add(c);
-            }
-            else {
+            } else {
                 temp.add(c);
             }
         }
         destructuredContent.add(temp.stream().map(String::valueOf).collect(Collectors.joining()));
         destructuredContent = destructuredContent.stream()
-                .filter(s -> !s.isBlank() && !s.equals(","))
+                .filter(s -> !s.isBlank() && !",".equals(s))
                 .map(PacketParser::cleanContent)
                 .toList();
 

@@ -17,7 +17,8 @@ public record StackCratesInventory(List<Deque<Character>> stackCrates) {
 
         return new StackCratesInventory(stackCratesToAdd);
     }
-    private static void fillStacksOfStackList(List<String> givenLines, List<Deque<Character>> stackCratesToAdd, int biggestStackSize) {
+    private static void fillStacksOfStackList(List<String> givenLines, List<Deque<Character>> stackCratesToAdd,
+                                              int biggestStackSize) {
         for(int i = biggestStackSize -1; i >= 0; i--) {
             String line = givenLines.get(i);
             int max = (line.length() + 1)/4;
@@ -31,7 +32,8 @@ public record StackCratesInventory(List<Deque<Character>> stackCrates) {
             }
         }
     }
-    private static void populateStackListWithRightNumberOfEmptyStacks(List<Deque<Character>> stackCratesToAdd, int numberOfStacks) {
+    private static void populateStackListWithRightNumberOfEmptyStacks(List<Deque<Character>> stackCratesToAdd,
+                                                                      int numberOfStacks) {
         int k = 0;
         while(k < numberOfStacks) {
             Deque<Character> stack = new ArrayDeque<>();

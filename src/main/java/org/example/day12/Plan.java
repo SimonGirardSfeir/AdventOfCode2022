@@ -140,7 +140,8 @@ public final class Plan {
 
         return path;
     }
-    private void checkReachable(Position currentPosition, List<Position> adjacentPositions, Direction direction, boolean reverse) {
+    private void checkReachable(Position currentPosition, List<Position> adjacentPositions,
+                                Direction direction, boolean reverse) {
         int x = currentPosition.x();
         int y = currentPosition.y();
         switch (direction) {

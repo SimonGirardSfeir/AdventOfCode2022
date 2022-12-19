@@ -9,7 +9,7 @@ public abstract class Monkey {
     private final long divisibleTest;
     private final int targetMonkeyIfTestSuccess;
     private final int targetMonkeyIfTestFails;
-    private int numberOfItemsInspected = 0;
+    private int numberOfItemsInspected;
 
     protected Monkey(int id, List<Item> items, Operation operation, long divisibleTest,
                   int targetMonkeyIfTestSuccess, int targetMonkeyIfTestFails) {

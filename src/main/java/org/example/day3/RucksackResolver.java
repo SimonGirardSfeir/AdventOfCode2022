@@ -5,14 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RucksackResolver {
-    static Map<Character, Integer> itemToPriorityMap = getItemToPriorityMap();
+public final class RucksackResolver {
+    public static final Map<Character, Integer> itemToPriorityMap = new HashMap<>();
+
+    static {
+        initializeItemToPriorityMap();
+    }
     
     private RucksackResolver() {
     }
 
-    private static Map<Character, Integer> getItemToPriorityMap() {
-        itemToPriorityMap = new HashMap<>();
+    private static void initializeItemToPriorityMap() {
         int counter = 1;
         for(char c = 'a'; c <= 'z'; c++) {
             itemToPriorityMap.put(c, counter);
@@ -22,7 +25,6 @@ public class RucksackResolver {
             itemToPriorityMap.put(c, counter);
             counter++;
         }
-        return itemToPriorityMap;
     }
     public static RucksackInventory getRuckSackInventoryFromLines(List<String> lines) {
         List<Rucksack> rucksacks = new ArrayList<>();

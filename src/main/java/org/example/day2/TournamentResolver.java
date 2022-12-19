@@ -5,13 +5,12 @@ import org.example.exception.InvalidDataFromFile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TournamentResolver {
+public final class TournamentResolver {
     private TournamentResolver() {
     }
 
     public static Tournament getTournamentFromLines(List<String> lines) {
         List<Round> rounds = new ArrayList<>();
-        Tournament tournament = new Tournament(rounds);
 
         for(String line : lines) {
             String[] splitLine = lineSplit(line);
@@ -28,12 +27,11 @@ public class TournamentResolver {
             rounds.add(tempRound);
         }
 
-        return tournament;
+        return new Tournament(rounds);
 
     }
     public static Tournament getTournamentType2FromLines(List<String> lines) {
         List<Round> rounds = new ArrayList<>();
-        Tournament tournament = new Tournament(rounds);
 
         for(String line : lines) {
             String[] splitLine = lineSplit(line);
@@ -49,7 +47,7 @@ public class TournamentResolver {
             rounds.add(tempRound);
         }
 
-        return tournament;
+        return new Tournament(rounds);
 
     }
     private static Shape getOpponentShape(String leftPartLine) {

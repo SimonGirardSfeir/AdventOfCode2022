@@ -5,7 +5,7 @@ import org.example.exception.InvalidDataFromFile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileSystemResolver {
+public final class FileSystemResolver {
     private FileSystemResolver() {
     }
 

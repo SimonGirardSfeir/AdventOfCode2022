@@ -2,7 +2,7 @@ package org.example.day14;
 
 import java.util.List;
 
-public class CaveResolver {
+public final class CaveResolver {
     private CaveResolver(){
     }
 
