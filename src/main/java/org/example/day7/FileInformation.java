@@ -5,12 +5,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public record FileInformation(String name, int fileSize) implements Node {
-
-    public static FileInformation of(String line) {
-        String[] splitLine = line.split(" ");
-        return new FileInformation(splitLine[1], Integer.parseInt(splitLine[0]));
-    }
-
     @Override
     public List<Node> subElements() {
         return Collections.emptyList();

@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class MarkerResolver {
+public final class MarkerResolver {
     private MarkerResolver() {
     }
 
@@ -27,7 +27,8 @@ public class MarkerResolver {
         return 0;
     }
 
-    private static void removeNonRelevantCharactersForMarker(int markerLength, Set<Character> tempSet, List<Character> list, int i) {
+    private static void removeNonRelevantCharactersForMarker(int markerLength, Set<Character> tempSet, 
+                                                             List<Character> list, int i) {
         Character characterToRemove = list.get(i - markerLength);
         //Set is chosen because contains has better time complexity, O(1) vs O(n)
         Set<Character> subListSet = new HashSet<>(list.subList(i - markerLength + 1, i +1));

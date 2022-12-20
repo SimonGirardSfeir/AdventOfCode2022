@@ -36,29 +36,35 @@ public final class FileSystemResolver {
                 i++;
             }
         }
-
         return directoryInformation;
     }
 
     private static boolean isItANewDirectoryToGoIn(String currentLine) {
         return currentLine.contains("$ cd") && (!currentLine.contains("/") && !currentLine.contains(".."));
     }
-    private static int feedDirectoryWithListedElementAndUpdateIndex(int index, Node currentDirectory, List<String> lines) {
-        String currentLine = lines.get(++index);
+    private static int feedDirectoryWithListedElementAndUpdateIndex(int index, Node currentDirectory,
+                                                                    List<String> lines) {
+        ++index;
+        String currentLine = lines.get(index);
         while (!currentLine.contains("$")) {
             List<Node> currentDirectoryNodes = currentDirectory.subElements();
             if (currentLine.contains("dir"))
-                currentDirectoryNodes.add(DirectoryInformation.of(currentLine.split(" ")[1], new ArrayList<>()));
+                currentDirectoryNodes.add(new DirectoryInformation(currentLine.split(" ")[1], new ArrayList<>()));
             else
-                currentDirectoryNodes.add(FileInformation.of(currentLine));
-            if (index < lines.size() -1)
-                currentLine = lines.get(++index);
-            else {
+                currentDirectoryNodes.add(getFileInformationFromLine(currentLine));
+            if (index < lines.size() -1) {
+                ++index;
+                currentLine = lines.get(index);
+            } else {
                 index++;
                 break;
             }
         }
 
         return index;
+    }
+    private static FileInformation getFileInformationFromLine(String line) {
+        String[] splitLine = line.split(" ");
+        return new FileInformation(splitLine[1], Integer.parseInt(splitLine[0]));
     }
 }
