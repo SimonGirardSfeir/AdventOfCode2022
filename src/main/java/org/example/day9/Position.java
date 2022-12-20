@@ -57,14 +57,10 @@ public final class Position {
         if (isPreviousPositionCandidateToApplyDirection()) {
             int dx = x - previous.x;
             int dy = y - previous.y;
-            if(dx > 1)
-                dx = 1;
-            if(dy > 1)
-                dy = 1;
-            if(dx < -1)
-                dx = -1;
-            if(dy < -1)
-                dy = -1;
+            if(dx != 0)
+                dx = dx/Math.abs(dx);
+            if(dy != 0)
+                dy = dy/Math.abs(dy);
 
             previous.applyDirection(Direction.valueOfDelta(dx, dy));
 
