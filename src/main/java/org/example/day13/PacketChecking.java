@@ -1,9 +1,8 @@
 package org.example.day13;
 
-import java.util.regex.Pattern;
+import static org.example.common.PatternReference.INTEGER_REGEX;
 
 public final class PacketChecking {
-    private static final Pattern integerRegex = Pattern.compile("^\\d+$");
     private PacketChecking(){
     }
 
@@ -15,6 +14,6 @@ public final class PacketChecking {
         return !content.contains("[") && !content.contains("]");
     }
     public static boolean isANumber(String content) {
-        return integerRegex.matcher(content).matches();
+        return INTEGER_REGEX.matcher(content).matches();
     }
 }

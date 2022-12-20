@@ -17,11 +17,11 @@ class InstructionPerformerReverseOrderTest {
         String givenLine2 = "[N] [C]    ";
         String givenLine3 = "[Z] [M] [P]";
         List<String> givenLines = List.of(givenLine1, givenLine2, givenLine3);
-        StackCratesInventory givenStackCratesInventory = StackCratesInventory.of(givenLines);
-        Instruction instruction1 = Instruction.of("move 1 from 2 to 1");
-        Instruction instruction2 = Instruction.of("move 3 from 1 to 3");
-        Instruction instruction3 = Instruction.of("move 2 from 2 to 1");
-        Instruction instruction4 = Instruction.of("move 1 from 1 to 2");
+        StackCratesInventory givenStackCratesInventory = StackCratesResolver.generateStackCratesInventory(givenLines);
+        Instruction instruction1 = StackCratesResolver.getInstructionFromLine("move 1 from 2 to 1");
+        Instruction instruction2 = StackCratesResolver.getInstructionFromLine("move 3 from 1 to 3");
+        Instruction instruction3 = StackCratesResolver.getInstructionFromLine("move 2 from 2 to 1");
+        Instruction instruction4 = StackCratesResolver.getInstructionFromLine("move 1 from 1 to 2");
         List<Instruction> givenInstructions = List.of(instruction1, instruction2, instruction3, instruction4);
 
         //When
