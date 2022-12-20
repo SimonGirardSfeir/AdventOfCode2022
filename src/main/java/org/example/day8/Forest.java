@@ -1,28 +1,12 @@
 package org.example.day8;
 
 import java.util.Arrays;
-import java.util.List;
 
 public record Forest(Tree[][] trees) {
-    public static Forest of(List<String> lines) {
-        int westEastLength = lines.get(0).length();
-        int northSouthLength = lines.size();
-        Tree[][] trees = new Tree[westEastLength][northSouthLength];
-
-        for(int j = 0; j< lines.size(); j++) {
-            String line = lines.get(j);
-            Tree[] treeLine = new Tree[westEastLength];
-            for(int i = 0; i < line.length(); i++) {
-                int treeHeight = Integer.parseInt(String.valueOf(line.charAt(i)));
-                treeLine[i] = new Tree(treeHeight);
-            }
-            trees[j] = treeLine;
-        }
-        return new Forest(trees);
-    }
+    private static final int NUMBER_OF_RECTANGULAR_EDGE = 4;
 
     public int countVisibleTrees() {
-        int numberOfVisibleTrees = trees().length*4 - 4;
+        int numberOfVisibleTrees = NUMBER_OF_RECTANGULAR_EDGE*(trees().length - 1);
 
         for(int x = 1; x < trees.length -1; x++) {
             for(int y = 1; y < trees.length -1; y++) {
@@ -75,36 +59,37 @@ public record Forest(Tree[][] trees) {
     }
     private boolean isCurrentTreeVisible(int x, int y) {
         int treeHeight = trees[x][y].height();
-        int maxHeightOnLeft = 0;
-        for(int i = 0; i < x; i++) {
-            if(trees[i][y].height() > maxHeightOnLeft)
-                maxHeightOnLeft = trees[i][y].height();
-        }
-        int maxHeightOnRight = 0;
-        for(int i = x+1; i < trees.length; i++) {
-            if(trees[i][y].height() > maxHeightOnRight)
-                maxHeightOnRight = trees[i][y].height();
-        }
-        int maxHeightOnBottom = 0;
-        for(int j = 0; j < y; j++) {
-            if(trees[x][j].height() > maxHeightOnBottom)
-                maxHeightOnBottom = trees[x][j].height();
-        }
-        int maxHeightOnTop = 0;
-        for(int j = y+1; j < trees.length; j++) {
-            if(trees[x][j].height() > maxHeightOnTop)
-                maxHeightOnTop = trees[x][j].height();
-        }
+        int maxHeightOnLeft = checkTreesHeightHorizontally(0, x,y);
+        int maxHeightOnRight = checkTreesHeightHorizontally(x+1, trees.length,y);
+        int maxHeightOnBottom = checkTreesHeightVertically(0, y, x);
+        int maxHeightOnTop = checkTreesHeightVertically(y+1, trees.length, x);
 
         return  (treeHeight > maxHeightOnTop) || (treeHeight > maxHeightOnBottom) ||
                 (treeHeight > maxHeightOnLeft) || (treeHeight > maxHeightOnRight);
 
     }
-
+    private int checkTreesHeightVertically(int yLowerLimit, int yUpperLimit, int currentX) {
+        int numberOfTrees = 0;
+        for(int j = yLowerLimit; j < yUpperLimit; j++) {
+            if(trees[currentX][j].height() > numberOfTrees)
+                numberOfTrees = trees[currentX][j].height();
+        }
+        return numberOfTrees;
+    }
+    private int checkTreesHeightHorizontally(int xLowerLimit, int xUpperLimit, int currentY) {
+        int numberOfTrees = 0;
+        for(int i = xLowerLimit; i < xUpperLimit; i++) {
+            if(trees[i][currentY].height() > numberOfTrees)
+                numberOfTrees = trees[i][currentY].height();
+        }
+        return numberOfTrees;
+    }
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Forest forest = (Forest) o;
         return Arrays.deepEquals(trees, forest.trees);
     }
