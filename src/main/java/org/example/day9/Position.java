@@ -1,14 +1,5 @@
 package org.example.day9;
 
-import static org.example.day9.Direction.DOWN;
-import static org.example.day9.Direction.DOWNLEFT;
-import static org.example.day9.Direction.DOWNRIGHT;
-import static org.example.day9.Direction.LEFT;
-import static org.example.day9.Direction.RIGHT;
-import static org.example.day9.Direction.UP;
-import static org.example.day9.Direction.UPLEFT;
-import static org.example.day9.Direction.UPRIGHT;
-
 public final class Position {
     private int x;
     private int y;
@@ -32,10 +23,10 @@ public final class Position {
 
     public void applyDirection(Direction direction) {
         switch (direction) {
-            case UP -> y++;
-            case DOWN -> y--;
-            case RIGHT -> x++;
-            case LEFT -> x--;
+            case UP -> y = y+1;
+            case DOWN -> y = y-1;
+            case RIGHT -> x = x+1;
+            case LEFT -> x = x-1;
             case UPRIGHT -> {
                 x++;
                 y++;
@@ -64,39 +55,23 @@ public final class Position {
     }
     private void applyDirectionToPreviousPosition() {
         if (isPreviousPositionCandidateToApplyDirection()) {
-            if (isNextDirectionUpLeft())
-                previous.applyDirection(UPLEFT);
-            else if (isNextDirectionUpRight())
-                previous.applyDirection(UPRIGHT);
-            else if (isNextDirectionDownLeft())
-                previous.applyDirection(DOWNLEFT);
-            else if (isNextDirectionDownRight())
-                previous.applyDirection(DOWNRIGHT);
-            else if (y == previous.y && x < previous.x)
-                previous.applyDirection(LEFT);
-            else if (y == previous.y && x > previous.x)
-                previous.applyDirection(RIGHT);
-            else if (y > previous.y)
-                previous.applyDirection(UP);
-            else if (y < previous.y)
-                previous.applyDirection(DOWN);
+            int dx = x - previous.x;
+            int dy = y - previous.y;
+            if(dx > 1)
+                dx = 1;
+            if(dy > 1)
+                dy = 1;
+            if(dx < -1)
+                dx = -1;
+            if(dy < -1)
+                dy = -1;
+
+            previous.applyDirection(Direction.valueOfDelta(dx, dy));
 
         }
     }
     private boolean isCurrentPositionTouchingPrevious() {
         return !(Math.abs(previous.x - x) < 2 && (Math.abs(previous.y - y)) < 2);
-    }
-    private boolean isNextDirectionDownRight() {
-        return y < previous.y && x > previous.x;
-    }
-    private boolean isNextDirectionDownLeft() {
-        return y < previous.y && x < previous.x;
-    }
-    private boolean isNextDirectionUpRight() {
-        return y > previous.y && x > previous.x;
-    }
-    private boolean isNextDirectionUpLeft() {
-        return y > previous.y && x < previous.x;
     }
     private boolean isPreviousPositionCandidateToApplyDirection() {
         return previous != null && isCurrentPositionTouchingPrevious();
