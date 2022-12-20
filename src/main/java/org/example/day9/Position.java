@@ -22,28 +22,9 @@ public final class Position {
     }
 
     public void applyDirection(Direction direction) {
-        switch (direction) {
-            case UP -> y = y+1;
-            case DOWN -> y = y-1;
-            case RIGHT -> x = x+1;
-            case LEFT -> x = x-1;
-            case UPRIGHT -> {
-                x++;
-                y++;
-            }
-            case UPLEFT -> {
-                x--;
-                y++;
-            }
-            case DOWNRIGHT -> {
-                x++;
-                y--;
-            }
-            case DOWNLEFT -> {
-                x--;
-                y--;
-            }
-        }
+        x = x + direction.getDx();
+        y = y + direction.getDy();
+
         applyDirectionToPreviousPosition();
     }
     public Position getLastPosition() {

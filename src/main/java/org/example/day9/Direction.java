@@ -16,7 +16,6 @@ public enum Direction {
             BY_LABEL.put(direction.label, direction);
             BY_DELTA.put(new Delta(direction.dx, direction.dy), direction);
         }
-
     }
 
     private final String label;
@@ -36,4 +35,10 @@ public enum Direction {
         return BY_DELTA.get(new Delta(dx, dy));
     }
 
+    public int getDx() {
+        return dx;
+    }
+    public int getDy() {
+        return dy;
+    }
 }
