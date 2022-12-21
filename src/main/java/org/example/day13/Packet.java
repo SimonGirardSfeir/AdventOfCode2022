@@ -47,7 +47,7 @@ public record Packet(String content) implements Comparable<Packet> {
     private void setOneSideAsNumberList(String left, String right, AtomicInteger isGreater) {
         if(isANumberList(left))
             left = PacketParser.addBrackets(left);
-        else if(isANumberList(right))
+        else
             right = PacketParser.addBrackets(right);
         compare(left, right, isGreater);
     }

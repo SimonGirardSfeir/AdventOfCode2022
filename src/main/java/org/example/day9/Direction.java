@@ -1,5 +1,7 @@
 package org.example.day9;
 
+import org.example.common.Position;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,12 +11,12 @@ public enum Direction {
     DOWNLEFT("DL", -1, -1), DOWNRIGHT("DR", 1, -1);
 
     private static final Map<String, Direction> BY_LABEL = new HashMap<>();
-    private static final Map<Delta, Direction> BY_DELTA = new HashMap<>();
+    private static final Map<Position, Direction> BY_DELTA = new HashMap<>();
 
     static {
         for(Direction direction : values()) {
             BY_LABEL.put(direction.label, direction);
-            BY_DELTA.put(new Delta(direction.dx, direction.dy), direction);
+            BY_DELTA.put(new Position(direction.dx, direction.dy), direction);
         }
     }
 
@@ -32,7 +34,7 @@ public enum Direction {
         return BY_LABEL.get(label);
     }
     static Direction valueOfDelta(int dx, int dy) {
-        return BY_DELTA.get(new Delta(dx, dy));
+        return BY_DELTA.get(new Position(dx, dy));
     }
 
     public int getDx() {
