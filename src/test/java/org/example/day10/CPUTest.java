@@ -162,7 +162,7 @@ class CPUTest {
                 noop
                 noop
                 noop""";
-        List<CPUInstruction> givenCpuInstructions = CPUResolver.getCPUInstructionFromLines
+        List<CPUInstruction> givenCpuInstructions = CPUResolver.getCPUInstructionsFromLines
                 (Arrays.asList(PATTERN.split(givenInput)));
         CPU givenCpu = new CPU();
         givenCpu.applyCPUInstructions(givenCpuInstructions);
@@ -329,7 +329,7 @@ class CPUTest {
             but otherwise, I should have manually created ~150 CPU instruction
             by hand in unit test rather than just copy-paste.
          */
-        List<CPUInstruction> givenCpuInstructions = CPUResolver.getCPUInstructionFromLines
+        List<CPUInstruction> givenCpuInstructions = CPUResolver.getCPUInstructionsFromLines
                 (Arrays.asList(PATTERN.split(givenInput)));
         CPU givenCpu = new CPU();
 

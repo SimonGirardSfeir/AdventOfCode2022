@@ -8,12 +8,6 @@ public class WeirdMonkey extends Monkey {
         super(id, items, operation, divisibleTest, targetMonkeyIfTestSuccess, targetMonkeyIfTestFails);
     }
 
-    public static WeirdMonkey of(List<String> lines) {
-        int[] monkeyParameters = getMonkeyParameters(lines);
-        return new WeirdMonkey(monkeyParameters[0], Item.of(lines.get(1)), Operation.of(lines.get(2)),
-                monkeyParameters[1], monkeyParameters[2], monkeyParameters[3]);
-    }
-
     @Override
     protected long affectWorryLevel(long worryLevel, Operation operation, long monkeysDivisibilityCheckLCM) {
         return switch (operation.operator()) {

@@ -21,7 +21,7 @@ class CPUResolverTest {
     @Test
     void resolve_part1_of_day10_problem() {
         //Given
-        List<CPUInstruction> givenInstructions = CPUResolver.getCPUInstructionFromLines(lines);
+        List<CPUInstruction> givenInstructions = CPUResolver.getCPUInstructionsFromLines(lines);
         CPU givenCpu = new CPU();
         givenCpu.applyCPUInstructions(givenInstructions);
 
@@ -35,7 +35,7 @@ class CPUResolverTest {
     @Test
     void resolve_part2_of_day10_problem() {
         //Given
-        List<CPUInstruction> givenInstructions = CPUResolver.getCPUInstructionFromLines(lines);
+        List<CPUInstruction> givenInstructions = CPUResolver.getCPUInstructionsFromLines(lines);
         CPU givenCpu = new CPU();
 
         //When

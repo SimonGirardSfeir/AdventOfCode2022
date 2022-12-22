@@ -8,8 +8,9 @@ import java.util.Objects;
 
 import static org.example.day10.InstructionType.NOOP;
 
-public class CPU {
+public final class CPU {
 
+    private static final int IMAGE_WIDTH = 40;
     private static final String INITIAL_LINE = "........................................";
     private int register;
     private int currentCycle;
@@ -65,8 +66,8 @@ public class CPU {
     }
 
     private void applyInstructionToImage(CPUInstruction cpuInstruction, List<String> image) {
-        int currentIndex = (currentCycle - 1) % 40;
-        int currentRow = (currentCycle - 1)/40;
+        int currentIndex = (currentCycle - 1) % IMAGE_WIDTH;
+        int currentRow = (currentCycle - 1)/IMAGE_WIDTH;
         String currentLine = image.get(currentRow);
         if (Objects.requireNonNull(cpuInstruction.instructionType()) == NOOP) {
             registerHistory.put(currentCycle, register);
@@ -77,17 +78,19 @@ public class CPU {
             currentLine = drawPixel(image, currentLine, currentIndex, currentRow);
             currentCycle++;
             currentIndex++;
-            if(currentIndex == 40) {
+            if(currentIndex == IMAGE_WIDTH) {
                 currentIndex = 0;
-                currentLine = image.get(++currentRow);
+                ++currentRow;
+                currentLine = image.get(currentRow);
             }
             registerHistory.put(currentCycle, register);
             currentLine = drawPixel(image, currentLine, currentIndex, currentRow);
             currentCycle++;
             currentIndex++;
-            if(currentIndex == 40) {
+            if(currentIndex == IMAGE_WIDTH) {
                 currentIndex = 0;
-                currentLine = image.get(++currentRow);
+                ++currentRow;
+                currentLine = image.get(currentRow);
             }
             register = register + cpuInstruction.value();
             registerHistory.put(currentCycle, register);

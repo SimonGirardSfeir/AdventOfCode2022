@@ -21,7 +21,7 @@ class ZooResolverTest {
     @Test
     void resolve_part1_of_day11_problem() {
         //Given
-        Zoo givenZoo = ZooResolver.getNormalMonkeysZooFromLines(lines);
+        Zoo givenZoo = ZooResolver.getMonkeysZooFromLines(lines, false);
 
         //When
         long monkeyBusiness = givenZoo.computeMonkeyBusiness(20);
@@ -33,7 +33,7 @@ class ZooResolverTest {
     @Test
     void resolve_part2_of_day11_problem() {
         //Given
-        Zoo givenZoo = ZooResolver.getWeirdMonkeysZooFromLines(lines);
+        Zoo givenZoo = ZooResolver.getMonkeysZooFromLines(lines, true);
 
         //When
         long monkeyBusiness = givenZoo.computeMonkeyBusiness(10000);

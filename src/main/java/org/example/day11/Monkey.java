@@ -20,14 +20,6 @@ public abstract class Monkey {
         this.targetMonkeyIfTestSuccess = targetMonkeyIfTestSuccess;
         this.targetMonkeyIfTestFails = targetMonkeyIfTestFails;
     }
-
-    protected static int[] getMonkeyParameters(List<String> lines) {
-        int id = Integer.parseInt(lines.get(0).substring(7, 8));
-        int divisibleTest = Integer.parseInt(lines.get(3).substring(21));
-        int targetMonkeyIfTestSuccess = Integer.parseInt(lines.get(4).substring(29));
-        int targetMonkeyIfTestFails = Integer.parseInt(lines.get(5).substring(30));
-        return new int[] {id, divisibleTest, targetMonkeyIfTestSuccess, targetMonkeyIfTestFails};
-    }
     public void addItem(Item item) {
         items.add(item);
     }
