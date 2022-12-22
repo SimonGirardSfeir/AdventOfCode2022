@@ -62,7 +62,7 @@ public final class ZooResolver {
             return new WeirdMonkey(id, items, operation,
                     divisibleTest, targetMonkeyIfTestSuccess, targetMonkeyIfTestFails);
         } else {
-            return new NormalMonkey(id, getItemsFromLine(lines.get(1)), operation,
+            return new NormalMonkey(id, items, operation,
                     divisibleTest, targetMonkeyIfTestSuccess, targetMonkeyIfTestFails);
         }
     }
