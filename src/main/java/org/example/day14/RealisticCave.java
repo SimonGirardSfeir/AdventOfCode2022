@@ -4,7 +4,7 @@ import org.example.common.Position;
 
 import java.util.Set;
 
-public class RealisticCave extends AbstractCave {
+public class RealisticCave extends Cave {
     public RealisticCave(Set<Position> rocks, Set<Position> sands, int maxDepth, int maxLeft, int maxRight) {
         super(rocks, sands, maxDepth, maxLeft, maxRight);
     }

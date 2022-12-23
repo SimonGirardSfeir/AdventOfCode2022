@@ -21,7 +21,7 @@ class CaveResolverTest {
     @Test
     void resolve_part1_of_day14_problem() {
         //Given
-        AbstractCave givenCave = CaveResolver.getUnrealisticCaveFromLines(lines);
+        Cave givenCave = CaveResolver.getUnrealisticCaveFromLines(lines);
 
         //When
         int unitsOfSandResting = givenCave.countUnitsOfSandResting();
@@ -33,7 +33,7 @@ class CaveResolverTest {
     @Test
     void resolve_part2_of_day14_problem() {
         //Given
-        AbstractCave givenCave = CaveResolver.getRealisticCaveFromLines(lines);
+        Cave givenCave = CaveResolver.getRealisticCaveFromLines(lines);
 
         //When
         int unitsOfSandResting = givenCave.countUnitsOfSandResting();

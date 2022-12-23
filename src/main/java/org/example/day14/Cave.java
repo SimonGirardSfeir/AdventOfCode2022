@@ -4,7 +4,7 @@ import org.example.common.Position;
 
 import java.util.Set;
 
-public abstract class AbstractCave {
+public abstract class Cave {
     protected static final int SAND_POURING_POSITION_X = 500;
     protected static final int SAND_POURING_POSITION_Y = 0;
     protected final Set<Position> rocks;
@@ -13,7 +13,7 @@ public abstract class AbstractCave {
     protected final int maxLeft;
     protected final int maxRight;
 
-    protected AbstractCave(Set<Position> rocks, Set<Position> sands, int maxDepth, int maxLeft, int maxRight) {
+    protected Cave(Set<Position> rocks, Set<Position> sands, int maxDepth, int maxLeft, int maxRight) {
         this.rocks = rocks;
         this.sands = sands;
         this.maxDepth = maxDepth;

@@ -13,7 +13,7 @@ class UnrealisticCaveTest {
         String line1 = "498,4 -> 498,6 -> 496,6";
         String line2 = "503,4 -> 502,4 -> 502,9 -> 494,9";
         List<String> givenLines = List.of(line1, line2);
-        AbstractCave givenCave = CaveResolver.getUnrealisticCaveFromLines(givenLines);
+        Cave givenCave = CaveResolver.getUnrealisticCaveFromLines(givenLines);
 
         //When
         int unitsOfSandResting = givenCave.countUnitsOfSandResting();
