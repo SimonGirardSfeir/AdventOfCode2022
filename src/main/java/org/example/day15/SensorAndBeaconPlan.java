@@ -2,7 +2,6 @@ package org.example.day15;
 
 import org.example.common.Position;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,11 +10,12 @@ public record SensorAndBeaconPlan(Set<SensorAndClosestBeacon> sensorAndBeacons) 
     public int countExcludedPositionsInARow(int rowNumber) {
         int numberOfExcludedPositionsInRow = 0;
         Set<Position> occupiedPoints = new HashSet<>();
-        Row row = new Row(new ArrayList<>(), Integer.MIN_VALUE, Integer.MAX_VALUE);
+        Row row = new Row();
+
         for(SensorAndClosestBeacon sensorAndClosestBeacon : sensorAndBeacons) {
             occupiedPoints.add(sensorAndClosestBeacon.sensor());
             occupiedPoints.add(sensorAndClosestBeacon.closestBeacon());
-            CoveredZone exclusionZone = sensorAndClosestBeacon.getExclusionZone(rowNumber, Integer.MIN_VALUE, Integer.MAX_VALUE);
+            CoveredZone exclusionZone = sensorAndClosestBeacon.getExclusionZone(rowNumber);
             if(exclusionZone != null)
                 row.addCoveredZone(exclusionZone);
         }
@@ -40,9 +40,9 @@ public record SensorAndBeaconPlan(Set<SensorAndClosestBeacon> sensorAndBeacons) 
         int y = 0;
 
         for(int i = 0; i <= upperLimit; i++) {
-            Row row = new Row(new ArrayList<>(), 0, upperLimit);
+            Row row = new Row(upperLimit);
             for(SensorAndClosestBeacon sensorAndClosestBeacon : sensorAndBeacons) {
-                CoveredZone exclusionZone = sensorAndClosestBeacon.getExclusionZone(i, 0, upperLimit);
+                CoveredZone exclusionZone = sensorAndClosestBeacon.getExclusionZone(i);
                 if(exclusionZone != null)
                     row.addCoveredZone(exclusionZone);
                 if(row.isFull())

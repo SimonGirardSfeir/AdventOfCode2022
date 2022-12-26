@@ -24,8 +24,17 @@ public final class CoveredZone implements Comparable<CoveredZone> {
         return (max + 1 < coveredZone.min) || (coveredZone.max + 1 < min);
     }
 
-    public int max() {
+    public int getMin() {
+        return min;
+    }
+    public int getMax() {
         return max;
+    }
+    public void setMin(int min) {
+        this.min = min;
+    }
+    public void setMax(int max) {
+        this.max = max;
     }
 
     @Override
