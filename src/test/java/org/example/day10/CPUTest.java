@@ -4,14 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.example.common.PatternReference.NEW_LINE_PATTERN;
 
 class CPUTest {
-
-    private static final Pattern PATTERN = Pattern.compile("\\n");
-
     @Test
     void getSignalStrengthsSum_should_give_sum_of_given_signal_strength(){
         //Given
@@ -163,7 +160,7 @@ class CPUTest {
                 noop
                 noop""";
         List<CPUInstruction> givenCpuInstructions = CPUResolver.getCPUInstructionsFromLines
-                (Arrays.asList(PATTERN.split(givenInput)));
+                (Arrays.asList(NEW_LINE_PATTERN.split(givenInput)));
         CPU givenCpu = new CPU();
         givenCpu.applyCPUInstructions(givenCpuInstructions);
 
@@ -330,7 +327,7 @@ class CPUTest {
             by hand in unit test rather than just copy-paste.
          */
         List<CPUInstruction> givenCpuInstructions = CPUResolver.getCPUInstructionsFromLines
-                (Arrays.asList(PATTERN.split(givenInput)));
+                (Arrays.asList(NEW_LINE_PATTERN.split(givenInput)));
         CPU givenCpu = new CPU();
 
         //When
