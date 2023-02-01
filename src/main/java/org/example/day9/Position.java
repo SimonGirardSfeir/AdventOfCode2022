@@ -1,5 +1,7 @@
 package org.example.day9;
 
+import org.example.common.Direction;
+
 public final class Position {
     private int x;
     private int y;

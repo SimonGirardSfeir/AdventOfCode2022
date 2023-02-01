@@ -21,7 +21,7 @@ class PlanResolverTest {
     @Test
     void resolve_part1_of_day12_problem() {
         //Given
-        Plan givenPlan = PlanResolver.getPlanFromLines(lines);
+        Plan givenPlan = PlanResolver.getPlanFromLines(lines, false);
 
         //When
         int shortestPath = givenPlan.findPathLengthForUniqueSource('S', 'E');
@@ -33,7 +33,7 @@ class PlanResolverTest {
     @Test
     void resolve_part2_of_day12_problem() {
         //Given
-        Plan givenPlan = PlanResolver.getPlanFromLines(lines);
+        Plan givenPlan = PlanResolver.getPlanFromLines(lines, true);
 
         //When
         int shortestPath = givenPlan.findPathLengthForMultipleSource('a', 'E');

@@ -1,7 +1,6 @@
 package org.example.day13;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.example.day13.PacketChecking.isANumber;
 import static org.example.day13.PacketChecking.isANumberList;
@@ -11,53 +10,45 @@ import static org.example.day13.PacketParser.destructuringContent;
 public record Packet(String content) implements Comparable<Packet> {
     @Override
     public int compareTo(Packet otherPacket) {
-        AtomicInteger isGreater = new AtomicInteger(0);
-        compare(content, otherPacket.content(), isGreater);
-        return isGreater.get();
+        return comparePacketContent(content, otherPacket.content());
     }
 
-    private void compare(String currentContent, String currentOther, AtomicInteger isGreater) {
-        if(isGreater.get() != 0)
-            return;
+    private int comparePacketContent(String currentContent, String currentOther) {
+        int compareValue = 0;
         if(isANumber(currentOther) && isANumber(currentContent)) {
-            compareNumber(currentContent, currentOther, isGreater);
-            return;
+            compareValue =  compareNumber(currentContent, currentOther);
+
+        } else if(isOnlyOneSideIsANumber(currentContent, currentOther)) {
+            compareValue = setOneSideAsNumberList(currentContent, currentOther);
+
+        } else {
+            List<String> destructuredContent = destructuringContent(currentContent);
+            List<String> destructuredOtherContent = destructuringContent(currentOther);
+            int minSize = Math.min(destructuredContent.size(), destructuredOtherContent.size());
+
+            for(int i = 0; i < minSize; i++) {
+                int compared = comparePacketContent(destructuredContent.get(i), destructuredOtherContent.get(i));
+                if(compared != 0) {
+                    compareValue =  compared;
+                    break;
+                }
+            }
+
+            if(compareValue == 0)
+                compareValue = Integer.compare(destructuredContent.size(), destructuredOtherContent.size());
         }
-        if(isOnlyOneSideIsANumber(currentContent, currentOther)) {
-            setOneSideAsNumberList(currentContent, currentOther, isGreater);
-            return;
-        }
-
-
-        List<String> destructuredContent = destructuringContent(currentContent);
-        List<String> destructuredOtherContent = destructuringContent(currentOther);
-        int minSize = Math.min(destructuredContent.size(), destructuredOtherContent.size());
-
-        for(int i = 0; i < minSize; i++) {
-            compare(destructuredContent.get(i), destructuredOtherContent.get(i), isGreater);
-            if(isGreater.get() != 0)
-                return;
-        }
-
-        if(destructuredContent.size() > destructuredOtherContent.size())
-            isGreater.set(1);
-        else if(destructuredContent.size() < destructuredOtherContent.size())
-            isGreater.set(-1);
+        return compareValue;
     }
-    private void setOneSideAsNumberList(String left, String right, AtomicInteger isGreater) {
+    private int setOneSideAsNumberList(String left, String right) {
         if(isANumberList(left))
             left = PacketParser.addBrackets(left);
         else
             right = PacketParser.addBrackets(right);
-        compare(left, right, isGreater);
+        return comparePacketContent(left, right);
     }
-    private static void compareNumber(String left, String right, AtomicInteger isGreater) {
+    private static int compareNumber(String left, String right) {
         int leftNumber = Integer.parseInt(left);
         int rightNumber = Integer.parseInt(right);
-        if(leftNumber < rightNumber)
-            isGreater.set(-1);
-        else if (leftNumber > rightNumber)
-            isGreater.set(1);
-
+        return  Integer.compare(leftNumber, rightNumber);
     }
 }

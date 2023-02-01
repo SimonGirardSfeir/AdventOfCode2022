@@ -43,11 +43,12 @@ public final class CoveredZone implements Comparable<CoveredZone> {
     }
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
+        if (obj == this)
+            return true;
+        if (obj == null || obj.getClass() != this.getClass())
+            return false;
         var that = (CoveredZone) obj;
-        return this.min == that.min &&
-                this.max == that.max;
+        return this.min == that.min && this.max == that.max;
     }
     @Override
     public int hashCode() {

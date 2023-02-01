@@ -7,7 +7,8 @@ public record SensorAndClosestBeacon(Position sensor, Position closestBeacon) {
         int manhattanDistanceBetweenSensorAndClosestBeacon = getManhattanDistance();
         int verticalDistanceBetweenSensorAndCurrentRow = Math.abs(rowNumber - sensor.y());
 
-        int excludedDistanceInRow = manhattanDistanceBetweenSensorAndClosestBeacon - verticalDistanceBetweenSensorAndCurrentRow;
+        int excludedDistanceInRow = manhattanDistanceBetweenSensorAndClosestBeacon
+                - verticalDistanceBetweenSensorAndCurrentRow;
 
         return (excludedDistanceInRow > 0) ?
                 new CoveredZone(sensor.x() - excludedDistanceInRow, sensor.x() + excludedDistanceInRow) : null;

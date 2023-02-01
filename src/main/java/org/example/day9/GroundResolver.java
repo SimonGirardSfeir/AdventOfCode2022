@@ -1,5 +1,7 @@
 package org.example.day9;
 
+import org.example.common.Direction;
+
 import java.util.List;
 
 public final class GroundResolver {

@@ -23,11 +23,13 @@ public record SensorAndBeaconPlan(Set<SensorAndClosestBeacon> sensorAndBeacons) 
         for(CoveredZone coveredZone : row.coveredZones()) {
             numberOfExcludedPositionsInRow += coveredZone.getLength();
         }
-        numberOfExcludedPositionsInRow = removeSensorAndBeaconFromExcludedPositions(rowNumber, numberOfExcludedPositionsInRow, occupiedPoints);
+        numberOfExcludedPositionsInRow = removeSensorAndBeaconFromExcludedPositions(rowNumber,
+                numberOfExcludedPositionsInRow, occupiedPoints);
         return numberOfExcludedPositionsInRow;
     }
 
-    private static int removeSensorAndBeaconFromExcludedPositions(int rowNumber, int count, Set<Position> occupiedPoints) {
+    private static int removeSensorAndBeaconFromExcludedPositions(int rowNumber, int count,
+                                                                  Set<Position> occupiedPoints) {
         for(Position position : occupiedPoints) {
             if(position.y() == rowNumber)
                 count--;

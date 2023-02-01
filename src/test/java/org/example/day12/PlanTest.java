@@ -16,7 +16,7 @@ class PlanTest {
         String line4 = "acctuvwj";
         String line5 = "abdefghi";
         List<String> givenLines = List.of(line1, line2, line3, line4, line5);
-        Plan givenPlan = Plan.of(givenLines);
+        Plan givenPlan = PlanResolver.getPlanFromLines(givenLines, false);
 
         //When
         int pathLength = givenPlan.findPathLengthForUniqueSource('S', 'E');
@@ -34,7 +34,7 @@ class PlanTest {
         String line4 = "acctuvwj";
         String line5 = "abdefghi";
         List<String> givenLines = List.of(line1, line2, line3, line4, line5);
-        Plan givenPlan = Plan.of(givenLines);
+        Plan givenPlan = PlanResolver.getPlanFromLines(givenLines, true);
 
         //When
         int pathLength = givenPlan.findPathLengthForMultipleSource('a', 'E');

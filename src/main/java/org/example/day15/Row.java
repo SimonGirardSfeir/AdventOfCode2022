@@ -26,12 +26,14 @@ public record Row(List<CoveredZone> coveredZones, int lowerLimit, int upperLimit
         coveredZones.add(coveredZone);
     }
     public int getFreePositionInRow() {
-        if(coveredZones.size() != 2) throw new NoSuchElementException();
+        if(coveredZones.size() != 2)
+            throw new NoSuchElementException();
         List<CoveredZone> orderedList = coveredZones.stream().sorted().toList();
 
         int freePosition = orderedList.get(0).getMax() + 1;
 
-        if(freePosition < lowerLimit || freePosition > upperLimit) throw new NoSuchElementException();
+        if(freePosition < lowerLimit || freePosition > upperLimit)
+            throw new NoSuchElementException();
 
         return freePosition;
     }

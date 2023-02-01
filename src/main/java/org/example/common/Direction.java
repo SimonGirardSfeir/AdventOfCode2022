@@ -1,6 +1,4 @@
-package org.example.day9;
-
-import org.example.common.Position;
+package org.example.common;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,10 +28,10 @@ public enum Direction {
         this.dy = dy;
     }
 
-    static Direction valueOfLabel(String label) {
+    public static Direction valueOfLabel(String label) {
         return BY_LABEL.get(label);
     }
-    static Direction valueOfDelta(int dx, int dy) {
+    public static Direction valueOfDelta(int dx, int dy) {
         return BY_DELTA.get(new Position(dx, dy));
     }
 
