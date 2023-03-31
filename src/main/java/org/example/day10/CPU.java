@@ -5,10 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.example.day10.InstructionType.NOOP;
 
 public final class CPU {
+
+    private static final int IMAGE_HEIGHT = 6;
 
     private static final int IMAGE_WIDTH = 40;
     private static final String INITIAL_LINE = "........................................";
@@ -52,13 +56,10 @@ public final class CPU {
         return sumSignalStrength;
     }
     public List<String> renderImage(List<CPUInstruction> cpuInstructions) {
-        List<String> image = new ArrayList<>();
-        image.add(INITIAL_LINE);
-        image.add(INITIAL_LINE);
-        image.add(INITIAL_LINE);
-        image.add(INITIAL_LINE);
-        image.add(INITIAL_LINE);
-        image.add(INITIAL_LINE);
+        List<String> image = Stream.generate(() -> INITIAL_LINE)
+                .limit(IMAGE_HEIGHT)
+                .collect(Collectors.toCollection(ArrayList::new));
+
         for(CPUInstruction cpuInstruction : cpuInstructions) {
             applyInstructionToImage(cpuInstruction, image);
         }

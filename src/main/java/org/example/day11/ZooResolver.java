@@ -12,7 +12,6 @@ import static org.example.day11.Operator.SQUARE;
 public final class ZooResolver {
     private static final int NUMBER_OF_LINES_FOR_A_SINGLE_MONKEY_IN_FILE = 7;
     private static final Pattern MONKEY_ID_PATTERN = Pattern.compile("Monkey \\d+:");
-    private static final Pattern ITEMS_PATTERN = Pattern.compile("Starting items: \\d+(, \\d+)*");
     private static final Pattern OPERATION_PATTERN = Pattern.compile("Operation: new = old ([*+]) (\\d+|old)");
     private static final Pattern TEST_DIVISIBLE_PATTERN = Pattern.compile("Test: divisible by \\d+");
     private static final Pattern DIVISIBLE_SUCCESS_PATTERN = Pattern.compile("If true: throw to monkey \\d+");
@@ -46,17 +45,16 @@ public final class ZooResolver {
         for(String line : lines) {
             if(MONKEY_ID_PATTERN.matcher(line).matches())
                 id = getUniqueNumberFromLine(line);
-            if(TEST_DIVISIBLE_PATTERN.matcher(line.trim()).matches())
+            else if(TEST_DIVISIBLE_PATTERN.matcher(line.trim()).matches())
                 divisibleTest = getUniqueNumberFromLine(line);
-            if(DIVISIBLE_SUCCESS_PATTERN.matcher(line.trim()).matches())
+            else if(DIVISIBLE_SUCCESS_PATTERN.matcher(line.trim()).matches())
                 targetMonkeyIfTestSuccess = getUniqueNumberFromLine(line);
-            if(DIVISIBLE_FAILURE_PATTERN.matcher(line.trim()).matches())
+            else if(DIVISIBLE_FAILURE_PATTERN.matcher(line.trim()).matches())
                 targetMonkeyIfTestFails = getUniqueNumberFromLine(line);
-            if(OPERATION_PATTERN.matcher(line.trim()).matches())
+            else if(OPERATION_PATTERN.matcher(line.trim()).matches())
                 operation = getOperationFromLine(line);
-            if(ITEMS_PATTERN.matcher(line.trim()).matches())
+            else
                 items = getItemsFromLine(line);
-
         }
         if(isWeird) {
             return new WeirdMonkey(id, items, operation,

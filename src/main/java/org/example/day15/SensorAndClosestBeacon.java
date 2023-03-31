@@ -13,7 +13,7 @@ public record SensorAndClosestBeacon(Position sensor, Position closestBeacon) {
         return (excludedDistanceInRow > 0) ?
                 new CoveredZone(sensor.x() - excludedDistanceInRow, sensor.x() + excludedDistanceInRow) : null;
     }
-    public int getManhattanDistance() {
+    private int getManhattanDistance() {
         return Math.abs(sensor.x() - closestBeacon.x()) + Math.abs(sensor.y() - closestBeacon.y());
     }
 }
