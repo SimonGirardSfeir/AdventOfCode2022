@@ -38,3 +38,9 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### JEnv local Java version configuration file ###
+.java-version
+
+### Used by previous versions of JEnv ###
+.jenv-version
