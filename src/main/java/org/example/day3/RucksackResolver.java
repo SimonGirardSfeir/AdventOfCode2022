@@ -35,15 +35,11 @@ public final class RucksackResolver {
         return new RucksackInventory(rucksacks);
     }
     private static boolean allElementsContainItem(List<String> elements, Character item) {
-        for(String element : elements) {
-            if (element.indexOf(item) < 0) {
-                return false;
-            }
-        }
-        return true;
+        return elements.stream()
+                .allMatch(element -> element.contains(item.toString()));
     }
     public static Character getCommonItemBetweenLines(List<String> lines) {
-        return lines.get(0)
+        return lines.getFirst()
                 .chars()
                 .mapToObj(i -> (char)i)
                 .filter(c -> allElementsContainItem(lines.stream().skip(1).toList(), c))

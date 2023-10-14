@@ -65,7 +65,7 @@ public record Zoo(List<Monkey> monkeys) {
     }
 
     private static long findLeastCommonMultiplicativeOfMonkeysDivisibilityCheck(List<Long> divisibilityChecks) {
-        long firstDivisibilityCheck = divisibilityChecks.get(0);
+        long firstDivisibilityCheck = divisibilityChecks.getFirst();
         for(int i = 1; i < divisibilityChecks.size(); i++) {
             firstDivisibilityCheck = findLeastCommonMultiplicative(firstDivisibilityCheck, divisibilityChecks.get(i));
         }

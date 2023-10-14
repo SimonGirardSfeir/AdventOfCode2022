@@ -12,7 +12,7 @@ public final class PlanResolver {
     }
 
     public static Plan getPlanFromLines(List<String> lines, boolean isReversePath) {
-        int horizontalLength = lines.get(0).length();
+        int horizontalLength = lines.getFirst().length();
         int verticalLength = lines.size();
         char[][] points = new char[verticalLength][];
         for (int i = 0; i < verticalLength; i++) {

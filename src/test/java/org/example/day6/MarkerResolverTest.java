@@ -18,7 +18,7 @@ class MarkerResolverTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        line = LineExtractor.getLines("src/test/resources/day6/inputData.txt").get(0);
+        line = LineExtractor.getLines("src/test/resources/day6/inputData.txt").getFirst();
     }
 
     private static Stream<Arguments> datastreamBuffersPart1() {

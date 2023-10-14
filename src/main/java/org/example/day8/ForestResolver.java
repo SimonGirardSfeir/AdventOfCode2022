@@ -7,7 +7,7 @@ public final class ForestResolver {
     }
 
     public static Forest getForestFromLines(List<String> lines) {
-        int westEastLength = lines.get(0).length();
+        int westEastLength = lines.getFirst().length();
         int northSouthLength = lines.size();
         Tree[][] trees = new Tree[westEastLength][northSouthLength];
 

@@ -30,7 +30,7 @@ public record Row(List<CoveredZone> coveredZones, int lowerLimit, int upperLimit
             throw new NoSuchElementException();
         List<CoveredZone> orderedList = coveredZones.stream().sorted().toList();
 
-        int freePosition = orderedList.get(0).getMax() + 1;
+        int freePosition = orderedList.getFirst().getMax() + 1;
 
         if(freePosition < lowerLimit || freePosition > upperLimit)
             throw new NoSuchElementException();
@@ -38,6 +38,6 @@ public record Row(List<CoveredZone> coveredZones, int lowerLimit, int upperLimit
         return freePosition;
     }
     public boolean isFull() {
-        return coveredZones.size() == 1 && coveredZones.get(0).equals(new CoveredZone(lowerLimit, upperLimit));
+        return coveredZones.size() == 1 && coveredZones.getFirst().equals(new CoveredZone(lowerLimit, upperLimit));
     }
 }

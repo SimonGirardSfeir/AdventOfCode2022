@@ -21,7 +21,7 @@ public final class StackCratesResolver {
         List<String> lineToProcess = new ArrayList<>();
 
         int i = 0;
-        String tempLine = lines.get(0);
+        String tempLine = lines.getFirst();
         while (tempLine.contains("[")) {
             lineToProcess.add(tempLine);
             i++;
@@ -58,7 +58,7 @@ public final class StackCratesResolver {
             values.add(Integer.parseInt(matcher.group()));
         }
 
-        return new Instruction(values.get(0),
+        return new Instruction(values.getFirst(),
                 values.get(1),
                 values.get(2));
     }
