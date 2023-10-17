@@ -1,5 +1,8 @@
 package org.example.day11;
 
+import org.example.exception.InvalidDataFromFile;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Monkey {
@@ -14,7 +17,7 @@ public abstract class Monkey {
     protected Monkey(int id, List<Item> items, Operation operation, long divisibleTest,
                   int targetMonkeyIfTestSuccess, int targetMonkeyIfTestFails) {
         this.id = id;
-        this.items = items;
+        this.items = new ArrayList<>(items);
         this.operation = operation;
         this.divisibleTest = divisibleTest;
         this.targetMonkeyIfTestSuccess = targetMonkeyIfTestSuccess;
@@ -27,32 +30,30 @@ public abstract class Monkey {
         numberOfItemsInspected++;
         long worryLevel = item.worryLevel();
 
-        worryLevel = affectWorryLevel(worryLevel, operation, monkeysDivisibilityCheckLCM);
+        worryLevel = affectWorryLevel(worryLevel, monkeysDivisibilityCheckLCM);
 
         return worryLevel;
     }
+    void performRoundOnMonkey(long monkeysDivisibilityCheckLCM,  List<Monkey> monkeysToConsider) {
+        for(Item item : items) {
+            long worryLevel = computeWorryLevel(item, monkeysDivisibilityCheckLCM);
 
-    protected abstract long affectWorryLevel(long worryLevel, Operation operation, long monkeysDivisibilityCheckLCM);
-    public int id() {
-        return id;
+            Monkey targetMonkey;
+            if(worryLevel % divisibleTest == 0) {
+                targetMonkey = monkeysToConsider.stream().filter(m -> m.id == targetMonkeyIfTestSuccess)
+                        .findFirst().orElseThrow(InvalidDataFromFile::new);
+            } else {
+                targetMonkey = monkeysToConsider.stream().filter(m -> m.id == targetMonkeyIfTestFails)
+                        .findFirst().orElseThrow(InvalidDataFromFile::new);
+            }
+            targetMonkey.addItem(new Item(worryLevel));
+        }
+        items.clear();
     }
-
-    public List<Item> items() {
-        return items;
-    }
-
+    protected abstract long affectWorryLevel(long worryLevel, long monkeysDivisibilityCheckLCM);
     public long divisibleTest() {
         return divisibleTest;
     }
-
-    public int targetMonkeyIfTestSuccess() {
-        return targetMonkeyIfTestSuccess;
-    }
-
-    public int targetMonkeyIfTestFails() {
-        return targetMonkeyIfTestFails;
-    }
-
     public long numberOfItemsInspected() {
         return numberOfItemsInspected;
     }

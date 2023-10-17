@@ -10,7 +10,7 @@ public class NormalMonkey extends Monkey {
     }
 
     @Override
-    protected long affectWorryLevel(long worryLevel, Operation operation, long monkeysDivisibilityCheckLCM) {
+    protected long affectWorryLevel(long worryLevel, long monkeysDivisibilityCheckLCM) {
         return switch (operation.operator()) {
             case ADDITION -> (worryLevel + operation.operand())/WORRY_LEVEL_DIVIDER;
             case MULTIPLICATION -> (worryLevel * operation.operand())/WORRY_LEVEL_DIVIDER;

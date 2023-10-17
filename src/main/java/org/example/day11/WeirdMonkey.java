@@ -9,7 +9,7 @@ public class WeirdMonkey extends Monkey {
     }
 
     @Override
-    protected long affectWorryLevel(long worryLevel, Operation operation, long monkeysDivisibilityCheckLCM) {
+    protected long affectWorryLevel(long worryLevel, long monkeysDivisibilityCheckLCM) {
         return switch (operation.operator()) {
             case ADDITION -> (worryLevel + operation.operand()) % monkeysDivisibilityCheckLCM;
             case MULTIPLICATION -> (worryLevel * operation.operand()) % monkeysDivisibilityCheckLCM;

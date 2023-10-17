@@ -1,31 +1,12 @@
 package org.example.day11;
 
-import org.example.exception.InvalidDataFromFile;
-
 import java.util.Comparator;
 import java.util.List;
 
 public record Zoo(List<Monkey> monkeys) {
 
     public void performRound(long monkeysDivisibilityCheckLCM) {
-        monkeys.forEach(monkey -> performRoundOnMonkey(monkey, monkeysDivisibilityCheckLCM));
-    }
-
-    private void performRoundOnMonkey(Monkey monkey, long monkeysDivisibilityCheckLCM) {
-        for(Item item : monkey.items()) {
-            long worryLevel = monkey.computeWorryLevel(item, monkeysDivisibilityCheckLCM);
-
-            Monkey targetMonkey;
-            if(worryLevel % monkey.divisibleTest() == 0) {
-                targetMonkey = monkeys().stream().filter(m -> m.id() == monkey.targetMonkeyIfTestSuccess())
-                        .findFirst().orElseThrow(InvalidDataFromFile::new);
-            } else {
-                targetMonkey = monkeys().stream().filter(m -> m.id() == monkey.targetMonkeyIfTestFails())
-                        .findFirst().orElseThrow(InvalidDataFromFile::new);
-            }
-            targetMonkey.addItem(new Item(worryLevel));
-        }
-        monkey.items().removeAll(monkey.items());
+        monkeys.forEach(monkey -> monkey.performRoundOnMonkey(monkeysDivisibilityCheckLCM, monkeys));
     }
 
     public long computeMonkeyBusiness(int numberOfRounds) {
@@ -77,12 +58,13 @@ public record Zoo(List<Monkey> monkeys) {
         }
         long absNumber1 = Math.abs(number1);
         long absNumber2 = Math.abs(number2);
-        long absHigherNumber = Math.max(absNumber1, absNumber2);
-        long absLowerNumber = Math.min(absNumber1, absNumber2);
-        long lcm = absHigherNumber;
-        while (lcm % absLowerNumber != 0) {
-            lcm += absHigherNumber;
+        long gcd = greatestCommonDivisor(absNumber1, absNumber2);
+        return (absNumber1 * absNumber2) / gcd;
+    }
+    private static long greatestCommonDivisor(long number1, long number2) {
+        if (number2 == 0) {
+            return number1;
         }
-        return lcm;
+        return greatestCommonDivisor(number2, number1 % number2);
     }
 }
